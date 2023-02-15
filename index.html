@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/fontawesome-free-6.3.0-web/css/all.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="app">
+        <div class="header">
+            <div class="header-wrap">
+                <div onclick="goToHomePage()" class="logo">
+                    <img src="https://inkythuatso.com/uploads/images/2021/12/nike-jacket-big-logo-inkythuatso-20-10-08-13.jpg"
+                        alt="">
+                    <p class="logo-name">Nike</p>
+                </div>
+                <ul class="navbar-list">
+                    <li onclick="goToHomePage()" id="home" class="navbar-item active">Home</li>
+                    <li id="about" class="navbar-item">About</li>
+                    <li id="bills" class="navbar-item">Bills</li>
+                    <li onclick="goToCartPage()" id="cart" class="navbar-item" >
+                        <div class="navbar-item-cart">
+                            <i class=" fa-solid fa-cart-shopping"></i>
+                            <span class="navbar-item-notice"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="body">
+            <div class="home-page">
+                <ul class="product-list">
+                    <li class="product-item">
+                        <img class="product-img" src="data:image/jpeg;base64,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" alt="" >
+                        <button class="product-add-cart">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                        <h4 class="product-name">Nike Air Force</h4>
+                        <div class="product-status">
+                            <p class="product-price">$100</p>
+                            <p class="product-quantity">Quantity: 12</p>
+                        </div >
+                    </li>
+                </ul>
+            </div>
+
+            <div class="cart-page hidden">
+                <div class="empty-cart">
+                    <img class="empty-cart-img" src="./assets/images/cart/117-1170538_404-your-cart-is-empty.png"
+                        alt="">
+                </div>
+
+                <div class="existing-cart">
+                    <div class="cart-head">
+                        <div class="cart-head-title">
+                            <div class="cart-head-title-left">
+                                <h5 class="cart-head-title-name">Product Name</h5>
+                            </div>
+                            <div class="cart-head-title-right">
+                                <h5 class="cart-head-title-name">Quantity</h5>
+                                <h5 class="cart-head-title-name">Subtotal</h5>
+                                <h5 class="cart-head-title-name">Total</h5>
+                                <h5 class="cart-head-title-name">Clear Cart</h5>
+                            </div>
+    
+                        </div>
+                    </div>
+                    <div class="cart-body">
+                        <ul class="cart-list">
+                            <li class="cart-item">
+                                <div class="cart-item-info">
+                                    <img class="cart-item-img" src="./assets/images/home/NikeAirForce1.jfif" alt="">
+                                    <div>
+                                        <h1 class="cart-item-name">Nike Air Force 1</h1>
+                                        <p class="cart-item-quantity">Quantity: 20</p>
+                                    </div>
+                                </div>
+                                <div class="cart-item-states">
+                                    <div class="cart-item-state">
+                                        <i class="plus-minus-icon fa-solid fa-minus"></i>
+                                        3
+                                        <i class="plus-minus-icon fa-solid fa-plus"></i>
+                                    </div>
+                                    <div class="cart-item-state">$4200</div>
+                                    <div class="cart-item-state">$12000</div>
+                                    <div class="cart-item-state">
+                                        <i class="clear-item-icon fa-regular fa-circle-xmark"></i>
+                                    </div>
+                                </div>
+                            </li>
+    
+                            <li class="cart-item">
+                                <div class="cart-item-info">
+                                    <img class="cart-item-img" src="./assets/images/home/NikeAirForce1.jfif" alt="">
+                                    <div>
+                                        <h1 class="cart-item-name">Nike Air Force 1</h1>
+                                        <p class="cart-item-quantity">Quantity: 20</p>
+                                    </div>
+                                </div>
+                                <div class="cart-item-states">
+                                    <div class="cart-item-state">
+                                        <i class="plus-minus-icon fa-solid fa-minus"></i>
+                                        3
+                                        <i class="plus-minus-icon fa-solid fa-plus"></i>
+                                    </div>
+                                    <div class="cart-item-state">$4200</div>
+                                    <div class="cart-item-state">$12000</div>
+                                    <div class="cart-item-state">
+                                        <i class="clear-item-icon fa-regular fa-circle-xmark"></i>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div >
+
+                <div class="cart-footer">
+                    <button onclick="goToHomePage()" class="back-home">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back to Shopping
+                    </button>
+                    <div class="total-price-cart">
+                        <p class="total-price-cart-text">Total: $12000</p>
+                        <button onclick="openModal()" class="buy">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal hidden">
+        <div onclick="closeModal()" class="modal-overlay">
+        </div>
+        <div class="modal-body">
+            <div class="auth-form">
+                <div class="auth-form-header">
+                    <h2 class="auth-form-heading">Thông tin người mua</h2>
+                    <i onclick="closeModal()" class="close-icon fa-solid fa-xmark"></i>
+                </div>
+
+                <div class="auth-form-body">
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Họ và tên</label>
+                        <span class="auth-form-required">*</span>
+                        <div class="auth-form-input-container">
+                            <input type="text" class="auth-form-input auth-form-input-col-2" placeholder="Họ">
+                            <input type="text" class="auth-form-input auth-form-input-col-2" placeholder="Tên">
+                        </div >
+                    </div>
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Email</label>
+                        <span class="auth-form-required">*</span>
+                        <input type="text" class="auth-form-input" placeholder="Email">
+                    </div>
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Số điện thoại</label>
+                        <span class="auth-form-required">*</span>
+                        <input type="text" class="auth-form-input" placeholder="Số điện thoại">
+                    </div>
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Địa chỉ</label>
+                        <span class="auth-form-required">*</span>
+                        <div class="auth-form-select-container">
+                            <select onchange="getDistrictByProvinceID()" name="province" id="province" class="auth-form-select">
+                                <option value="">--Chọn Tỉnh/Thành phố--</option>
+                                <!-- <option value="Hà Nội">Hà Nội</option>
+                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                <option value="Hải Phòng">Hải Phòng</option>
+                                <option value="Quảng Ninh">Quảng Ninh</option> -->
+                            </select>
+                            <select onchange="getWardsByDistrictID()" name="district" id="district" class="auth-form-select">
+                                <option value="">--Chọn Huyện/Quận--</option>
+                                <!-- <option value="Long Biên">Long Biên</option>
+                                <option value="Đống Đa">Đống Đa</option>
+                                <option value="Quận 1">Quận 1</option>
+                                <option value="Cô Tô">Cô Tô</option>
+                                <option value="Hải An">Hải An</option> -->
+                            </select>
+                            <select name="ward" id="ward" class="auth-form-select">
+                                <option value="">--Chọn Phường/Xã--</option>
+                                <!-- <option value="Đức Giang">Đức Giang</option>
+                                <option value="Cát Linh">Cát Linh</option>
+                                <option value="Bến Nghé">Bến Nghé</option>
+                                <option value="Ô Lâm">Ô Lâm</option>
+                                <option value="Cát Bi">Cát Bi</option> -->
+                            </select>
+                        </div>
+                        <input type="text" class="auth-form-input" placeholder="Số nhà">
+                    </div>
+                    <div class="auth-form-group">
+                        <label class="auth-form-label">Lời nhắn</label>
+                        <textarea cols="50" rows="5" class="auth-form-input auth-form-input-message"></textarea>
+                    </div>
+                </div>
+
+                <div class="auth-form-footer">
+                    <button onclick="closeModal()" class="auth-form-close auth-form-btn">Hủy</button>
+                    <button class="auth-form-confirm auth-form-btn">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+
+</html>
