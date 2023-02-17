@@ -1,0 +1,12 @@
+{
+    "bills": [
+        {
+             "id": 1, 
+             "date": "", 
+             "fullname": "",
+             "email": "",
+             "phoneNumber": "",
+             "address": ""
+        }
+    ]
+}

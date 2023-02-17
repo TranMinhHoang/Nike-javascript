@@ -71,14 +71,21 @@ const modalHtml = document.querySelector(".modal");
 const listDistrictHtml = document.querySelector("#district");
 const listWardHtml = document.querySelector("#ward");
 
+// bai 12
+const setLocalStorage = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data));
+};
+
+const getLocalStorage = (key) => {
+    return JSON.parse(localStorage.getItem(key)) || [];
+};
+
 // Bai 2
-const setListData = (() => {
-    localStorage.setItem(keyLocalStorageListSP, JSON.stringify(listData));
-})();
+setLocalStorage(keyLocalStorageListSP, listData);
 
 // Bai 3
 const getListData = () => {
-    const listData = JSON.parse(localStorage.getItem(keyLocalStorageListSP));
+    const listData = getLocalStorage(keyLocalStorageListSP);
     const product = listData.map(
         (data) =>
             `<li class="product-item">
@@ -98,7 +105,7 @@ const getListData = () => {
 getListData();
 
 // Bai 4
-const listCart = JSON.parse(localStorage.getItem("listCart")) || [];
+const listCart = getLocalStorage(keyLocalStorageItemCart);
 
 const cart = {
     idSP: null,
@@ -115,7 +122,7 @@ const addSP = (id) => {
         newCart.soLuong = 1;
         listCart.push(newCart);
     }
-    localStorage.setItem("listCart", JSON.stringify(listCart));
+    setLocalStorage(keyLocalStorageItemCart, listCart);
     handlePriceCart();
 };
 
@@ -210,10 +217,10 @@ const goToHomePage = () => {
 
 const plusItem = (id) => {
     const item = listCart.find((cart) => cart.idSP === id);
-    const infoItem = listData.find(data => data.id === item.idSP)
+    const infoItem = listData.find((data) => data.id === item.idSP);
     if (item.soLuong < infoItem.quantity) {
         item.soLuong++;
-        localStorage.setItem("listCart", JSON.stringify(listCart));
+        setLocalStorage(keyLocalStorageItemCart, listCart);
         handlePriceCart();
         goToCartPage();
     }
@@ -225,7 +232,7 @@ const minusItem = (id) => {
         removeItem(item.id);
     } else {
         item.soLuong = item.soLuong - 1;
-        localStorage.setItem("listCart", JSON.stringify(listCart));
+        setLocalStorage(keyLocalStorageItemCart, listCart);
         handlePriceCart();
         goToCartPage();
     }
@@ -234,7 +241,7 @@ const minusItem = (id) => {
 const removeItem = (id) => {
     const indexItem = listCart.findIndex((cart) => cart.idSP === id);
     listCart.splice(indexItem, 1);
-    localStorage.setItem("listCart", JSON.stringify(listCart));
+    setLocalStorage(keyLocalStorageItemCart, listCart);
     handlePriceCart();
     goToCartPage();
 };
@@ -248,6 +255,8 @@ const closeModal = () => {
     modalHtml.classList.add("hidden");
 };
 
+let provinces = [];
+
 // Bai 8
 const getListProvince = (() => {
     const listProvince = document.querySelector("#province");
@@ -255,9 +264,10 @@ const getListProvince = (() => {
     fetch("https://provinces.open-api.vn/api/p/")
         .then((res) => res.json())
         .then((data) => {
+            provinces = data;
             const provinceHtml = data.map(
                 (data) => `
-            <option key="${data.code}" value="${data.code}">${data.name}</option>
+            <option label="${data.name}" value="${data.code}"></option>
             `
             );
             listProvince.innerHTML =
@@ -282,15 +292,18 @@ const getListWard = () => {
 };
 
 // Bai 9
+let districts = [];
+let wards = [];
+
 const getDistrictByProvinceID = async () => {
     const idProvince = document.getElementById("province").value;
     const listDistrict = await getListDistrict();
-    const result = listDistrict.filter(
+    districts = listDistrict.filter(
         (district) => district.province_code === Number(idProvince)
     );
-    const districtHtml = result.map(
+    const districtHtml = districts.map(
         (district) => `
-    <option value="${district.code}">${district.name}</option>
+    <option label="${district.name}" value="${district.code}"></option>
     `
     );
     listDistrictHtml.innerHTML =
@@ -301,14 +314,218 @@ const getDistrictByProvinceID = async () => {
 const getWardsByDistrictID = async () => {
     const idDistrict = document.getElementById("district").value;
     const listWard = await getListWard();
-    const result = listWard.filter(
+    wards = listWard.filter(
         (ward) => ward.district_code === Number(idDistrict)
     );
-    const wardHtml = result.map(
+    const wardHtml = wards.map(
         (ward) => `
-    <option value="${ward.code}">${ward.name}</option>
+    <option label="${ward.name}" value="${ward.code}"></option>
     `
     );
     listWardHtml.innerHTML =
         '<option value="">--Chọn Phường/Xã--</option>' + wardHtml.join(" ");
+};
+
+// bai 10
+const IDTest = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22,
+];
+
+const createRandomID = () => {
+    const randomID = Math.floor(Math.random() * 100);
+    if (IDTest.includes(randomID)) {
+        return createRandomID();
+    }
+    return randomID;
+};
+
+// bai 11
+const firstNameInputHtml = document.getElementById("firstname");
+const lastNameInputHtml = document.getElementById("lastname");
+const emailInputHtml = document.getElementById("email");
+const phoneNumberInputHtml = document.getElementById("phonenumber");
+const addressProvinceHtml = document.getElementById("province");
+const addressDistrictHtml = document.getElementById("district");
+const addressWardHtml = document.getElementById("ward");
+const addressInputHtml = document.getElementById("numberaddress");
+const noteInputHtml = document.getElementById("notemessage");
+
+const regex = {
+    email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+    number: /^[0-9]+$/,
+};
+
+const getParentElement = (childElement, querySelector) => {
+    const targetElement =
+        childElement.parentElement.querySelector(querySelector);
+    if (targetElement !== null) {
+        return targetElement;
+    }
+    return getParentElement(childElement.parentElement, querySelector);
+};
+
+const isRequired = (el) => {
+    const errorMessageHtml = getParentElement(el, ".auth-form-error");
+    if (el.value !== "") {
+        errorMessageHtml.innerHTML = null;
+        return true;
+    } else {
+        errorMessageHtml.innerHTML = `Vui lòng nhập ${el.name}!`;
+        return false;
+    }
+};
+
+const isNumber = (el) => {
+    const errorMessageHtml = getParentElement(el, ".auth-form-error");
+    if (regex.number.test(el.value)) {
+        errorMessageHtml.innerHTML = null;
+        return true;
+    } else {
+        errorMessageHtml.innerHTML = `Nhập sai ${el.name}!`;
+        return false;
+    }
+};
+
+const isEmail = (el) => {
+    const errorMessageHtml = getParentElement(el, ".auth-form-error");
+    if (regex.email.test(el.value)) {
+        errorMessageHtml.innerHTML = null;
+        return true;
+    } else {
+        errorMessageHtml.innerHTML = `Nhập sai ${el.name}!`;
+        return false;
+    }
+};
+
+const validatePhoneNumber = () => {
+    if(phoneNumberInputHtml.value === "") {
+        return isRequired(phoneNumberInputHtml)
+    } else {
+        return isNumber(phoneNumberInputHtml);
+    }
+};
+
+const validateEmail = () => {
+    if(emailInputHtml.value === "") {
+        return isRequired(emailInputHtml)
+    } else {
+        return isEmail(emailInputHtml);
+    }
+};
+
+const validateAddress = () => {
+    const errorMessageHtml = getParentElement(
+        addressInputHtml,
+        ".auth-form-error"
+    );
+
+    if (
+        addressProvinceHtml.value !== "" &&
+        addressDistrictHtml.value !== "" &&
+        addressWardHtml.value !== "" &&
+        addressInputHtml.value !== ""
+    ) {
+        errorMessageHtml.innerHTML = null;
+        return true;
+    } else {
+        errorMessageHtml.innerHTML = "Vui lòng điền đầy đủ thông tin địa chỉ!";
+        return false;
+    }
+};
+
+const handleChangeProvince = () => {
+    getDistrictByProvinceID();
+    validateAddress();
+};
+
+const handleChangeDistrict = () => {
+    getWardsByDistrictID();
+    validateAddress();
+};
+
+const handleInfoUser = () => {
+    isRequired(firstNameInputHtml);
+    isRequired(lastNameInputHtml);
+    validateEmail();
+    validatePhoneNumber();
+    validateAddress();
+
+    if (
+        isRequired(firstNameInputHtml) &&
+        isRequired(lastNameInputHtml) &&
+        validateEmail() &&
+        validatePhoneNumber() &&
+        validateAddress()
+    ) {
+        const province = provinces.find(
+            (province) => province.code === +addressProvinceHtml.value
+        );
+        const district = districts.find(
+            (district) => district.code === +addressDistrictHtml.value
+        );
+        const ward = wards.find((ward) => ward.code === +addressWardHtml.value);
+        dateTime = new Date();
+
+        const infoClient = {
+            id: createRandomID(),
+            fullName: firstNameInputHtml.value + " " + lastNameInputHtml.value,
+            email: emailInputHtml.value,
+            phoneNumber: phoneNumberInputHtml.value,
+            address: `${addressInputHtml.value}, ${ward.name}, ${district.name}, ${province.name}`,
+            date: `${dateTime.getDate()}/${
+                dateTime.getMonth() + 1
+            }/${dateTime.getFullYear()}`,
+            note: noteInputHtml.value,
+        };
+        console.log(infoClient);
+    } 
+};
+
+// bai 14
+const getListBill = () => {
+    fetch("http://localhost:3000/bills")
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
+};
+
+const getBillByID = (id) => {
+    fetch(`http://localhost:3000/bills/${id}`)
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
+};
+
+const postBill = (data) => {
+    fetch("http://localhost:3000/bills", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Success:", data);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+};
+
+const updateBill = () => {
+    fetch(`http://localhost:3000/bills/${id}`, {
+        method: "PUT",
+        body: JSON.stringify({ data }),
+    })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
+        .catch((err) => console.log(err));
+};
+
+const deleteBill = (id) => {
+    fetch(`http://localhost:3000/bills/${id}`, {
+        method: "DELETE",
+    }).then((response) => response.json());
 };

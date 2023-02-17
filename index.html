@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="modal hidden">
+    <div class="modal">
         <div onclick="closeModal()" class="modal-overlay">
         </div>
         <div class="modal-body">
@@ -143,63 +143,74 @@
                 </div>
 
                 <div class="auth-form-body">
-                    <div class="auth-form-group">
-                        <label class="auth-form-label">Họ và tên</label>
-                        <span class="auth-form-required">*</span>
-                        <div class="auth-form-input-container">
-                            <input type="text" class="auth-form-input auth-form-input-col-2" placeholder="Họ">
-                            <input type="text" class="auth-form-input auth-form-input-col-2" placeholder="Tên">
-                        </div >
-                    </div>
-                    <div class="auth-form-group">
-                        <label class="auth-form-label">Email</label>
-                        <span class="auth-form-required">*</span>
-                        <input type="text" class="auth-form-input" placeholder="Email">
-                    </div>
-                    <div class="auth-form-group">
-                        <label class="auth-form-label">Số điện thoại</label>
-                        <span class="auth-form-required">*</span>
-                        <input type="text" class="auth-form-input" placeholder="Số điện thoại">
-                    </div>
-                    <div class="auth-form-group">
-                        <label class="auth-form-label">Địa chỉ</label>
-                        <span class="auth-form-required">*</span>
-                        <div class="auth-form-select-container">
-                            <select onchange="getDistrictByProvinceID()" name="province" id="province" class="auth-form-select">
-                                <option value="">--Chọn Tỉnh/Thành phố--</option>
-                                <!-- <option value="Hà Nội">Hà Nội</option>
-                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                                <option value="Hải Phòng">Hải Phòng</option>
-                                <option value="Quảng Ninh">Quảng Ninh</option> -->
-                            </select>
-                            <select onchange="getWardsByDistrictID()" name="district" id="district" class="auth-form-select">
-                                <option value="">--Chọn Huyện/Quận--</option>
-                                <!-- <option value="Long Biên">Long Biên</option>
-                                <option value="Đống Đa">Đống Đa</option>
-                                <option value="Quận 1">Quận 1</option>
-                                <option value="Cô Tô">Cô Tô</option>
-                                <option value="Hải An">Hải An</option> -->
-                            </select>
-                            <select name="ward" id="ward" class="auth-form-select">
-                                <option value="">--Chọn Phường/Xã--</option>
-                                <!-- <option value="Đức Giang">Đức Giang</option>
-                                <option value="Cát Linh">Cát Linh</option>
-                                <option value="Bến Nghé">Bến Nghé</option>
-                                <option value="Ô Lâm">Ô Lâm</option>
-                                <option value="Cát Bi">Cát Bi</option> -->
-                            </select>
+                    <form action="" method="POST" class="auth-form-client" id="form-client">
+                        <div class="auth-form-group">
+                            <label class="auth-form-label">Họ và tên</label>
+                            <span class="auth-form-required">*</span>
+                            <div class="auth-form-input-container">
+                                <div class="auth-form-input-col-2">
+                                    <input onblur="isRequired(this)" onkeypress="isRequired(this)" type="text" id="firstname" name="họ của bạn" class="auth-form-input " placeholder="Họ">
+                                    <span class="auth-form-error"></span>
+                                </div>
+                                <div class="auth-form-input-col-2">
+                                    <input onblur="isRequired(this)" onkeypress="isRequired(this)" type="text" id="lastname" name="tên của bạn" class="auth-form-input " placeholder="Tên">
+                                    <span class="auth-form-error"></span>
+                                </div>
+                            </div >
                         </div>
-                        <input type="text" class="auth-form-input" placeholder="Số nhà">
-                    </div>
-                    <div class="auth-form-group">
-                        <label class="auth-form-label">Lời nhắn</label>
-                        <textarea cols="50" rows="5" class="auth-form-input auth-form-input-message"></textarea>
-                    </div>
+                        <div class="auth-form-group">
+                            <label class="auth-form-label">Email</label>
+                            <span class="auth-form-required">*</span>
+                            <input onblur="validateEmail()" onkeyup="validateEmail()" type="text" id="email" name="email" class="auth-form-input" placeholder="Email">
+                            <span class="auth-form-error"></span>
+                        </div>
+                        <div class="auth-form-group">
+                            <label class="auth-form-label">Số điện thoại</label>
+                            <span class="auth-form-required">*</span>
+                            <input onblur="validatePhoneNumber()" onkeyup="validatePhoneNumber()" type="text" id="phonenumber" name="số điện thoại" class="auth-form-input" placeholder="Số điện thoại">
+                            <span class="auth-form-error"></span>
+                        </div>
+                        <div class="auth-form-group">
+                            <label class="auth-form-label">Địa chỉ</label>
+                            <span class="auth-form-required">*</span>
+                            <div class="auth-form-select-container">
+                                <select onchange="handleChangeProvince()" name="province" id="province" class="auth-form-select">
+                                    <option value="">--Chọn Tỉnh/Thành phố--</option>
+                                    <!-- <option value="Hà Nội">Hà Nội</option>
+                                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                    <option value="Hải Phòng">Hải Phòng</option>
+                                    <option value="Quảng Ninh">Quảng Ninh</option> -->
+                                </select>
+                                <select onchange="handleChangeDistrict()" name="district" id="district" class="auth-form-select">
+                                    <option value="">--Chọn Huyện/Quận--</option>
+                                    <!-- <option value="Long Biên">Long Biên</option>
+                                    <option value="Đống Đa">Đống Đa</option>
+                                    <option value="Quận 1">Quận 1</option>
+                                    <option value="Cô Tô">Cô Tô</option>
+                                    <option value="Hải An">Hải An</option> -->
+                                </select>
+                                <select onchange="validateAddress()" name="ward" id="ward" class="auth-form-select">
+                                    <option value="">--Chọn Phường/Xã--</option>
+                                    <!-- <option value="Đức Giang">Đức Giang</option>
+                                    <option value="Cát Linh">Cát Linh</option>
+                                    <option value="Bến Nghé">Bến Nghé</option>
+                                    <option value="Ô Lâm">Ô Lâm</option>
+                                    <option value="Cát Bi">Cát Bi</option> -->
+                                </select>
+                            </div>
+                            <input onblur="validateAddress()" onkeyup="validateAddress(this)" type="text" id="numberaddress" name="numberaddress" class="auth-form-input" placeholder="Số nhà" >
+                            <span class="auth-form-error"></span>
+                        </div>
+                        <div class="auth-form-group">
+                            <label class="auth-form-label">Lời nhắn</label>
+                            <textarea cols="50" rows="5" id="notemessage" class="auth-form-input auth-form-input-note"></textarea>
+                        </div>
+                    </form >
                 </div>
 
                 <div class="auth-form-footer">
                     <button onclick="closeModal()" class="auth-form-close auth-form-btn">Hủy</button>
-                    <button class="auth-form-confirm auth-form-btn">Xác nhận</button>
+                    <button onclick="handleInfoUser()" class="auth-form-confirm auth-form-btn">Xác nhận</button>
                 </div>
             </div>
         </div>
