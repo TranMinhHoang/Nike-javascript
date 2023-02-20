@@ -1,4 +1,4 @@
-// Bai 1
+// Bai 1 ok
 const listData = [
     {
         id: 1,
@@ -47,13 +47,13 @@ const listData = [
 const keyLocalStorageListSP = "DANHSACHSP";
 const keyLocalStorageItemCart = "DANHSACHIMTEMCART";
 
-// bai 3
+// bai 3 ok
 const listProductHtml = document.querySelector(".product-list");
 
-// bai 5
+// bai 5 ok
 const countCartHtml = document.querySelector(".navbar-item-notice");
 
-// bai 6
+// bai 6 ok
 const navbarCartHtml = document.querySelector("#cart");
 const navbarHomeHtml = document.querySelector("#home");
 const homePageHtml = document.querySelector(".home-page");
@@ -64,14 +64,14 @@ const buyCartHtml = document.querySelector(".total-price-cart");
 const listCartHtml = document.querySelector(".cart-list");
 const totalPriceHtml = document.querySelector(".total-price-cart-text");
 
-// bai 7
+// bai 7 ok
 const modalHtml = document.querySelector(".modal");
 
-// bai 9
+// bai 9 ok
 const listDistrictHtml = document.querySelector("#district");
 const listWardHtml = document.querySelector("#ward");
 
-// bai 12
+// bai 12 ok
 const setLocalStorage = (key, data) => {
     localStorage.setItem(key, JSON.stringify(data));
 };
@@ -80,10 +80,10 @@ const getLocalStorage = (key) => {
     return JSON.parse(localStorage.getItem(key)) || [];
 };
 
-// Bai 2
+// Bai 2 ok
 setLocalStorage(keyLocalStorageListSP, listData);
 
-// Bai 3
+// Bai 3 ok
 const getListData = () => {
     const listData = getLocalStorage(keyLocalStorageListSP);
     const product = listData.map(
@@ -104,7 +104,7 @@ const getListData = () => {
 };
 getListData();
 
-// Bai 4
+// Bai 4 ok
 const listCart = getLocalStorage(keyLocalStorageItemCart);
 
 const cart = {
@@ -126,7 +126,7 @@ const addSP = (id) => {
     handlePriceCart();
 };
 
-// Bai 5
+// Bai 5 ok
 const priceCart = new Map();
 
 const countCart = () => {
@@ -151,7 +151,25 @@ const handlePriceCart = () => {
 };
 handlePriceCart();
 
-// Bai 6
+// Bai 6 ok
+const DetailCart = () => {
+    const detailListCart = []
+    listCart.map(cart => {
+        const infoProduct = listData.find(product => cart.idSP === product.id);
+        const detailItem = {
+            id: infoProduct.id,
+            name: infoProduct.name,
+            image: infoProduct.image,
+            quantity: infoProduct.quantity,
+            buyCount: cart.soLuong,
+            subPrice: infoProduct.price,
+            totalPrice: priceCart.get(infoProduct.id)
+        }
+        detailListCart.push(detailItem);
+    })
+    return detailListCart;
+};
+
 const goToCartPage = () => {
     homePageHtml.classList.add("hidden");
     navbarHomeHtml.classList.remove("active");
@@ -246,7 +264,7 @@ const removeItem = (id) => {
     goToCartPage();
 };
 
-// Bai 7
+// Bai 7 ok
 const openModal = () => {
     modalHtml.classList.remove("hidden");
 };
@@ -255,9 +273,9 @@ const closeModal = () => {
     modalHtml.classList.add("hidden");
 };
 
-let provinces = [];
 
-// Bai 8
+// Bai 8 ok
+let provinces = [];
 const getListProvince = (() => {
     const listProvince = document.querySelector("#province");
 
@@ -291,7 +309,7 @@ const getListWard = () => {
         .catch((err) => console.log(err));
 };
 
-// Bai 9
+// Bai 9 ok
 let districts = [];
 let wards = [];
 
@@ -326,21 +344,14 @@ const getWardsByDistrictID = async () => {
         '<option value="">--Chọn Phường/Xã--</option>' + wardHtml.join(" ");
 };
 
-// bai 10
-const IDTest = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22,
-];
-
-const createRandomID = () => {
-    const randomID = Math.floor(Math.random() * 100);
-    if (IDTest.includes(randomID)) {
-        return createRandomID();
-    }
-    return randomID;
+// bai 10 ok
+const createID = () => {
+    const date = new Date();
+    const ID = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getTime()}`;
+    return ID;
 };
 
-// bai 11
+// bai 11 ok
 const firstNameInputHtml = document.getElementById("firstname");
 const lastNameInputHtml = document.getElementById("lastname");
 const emailInputHtml = document.getElementById("email");
@@ -399,16 +410,16 @@ const isEmail = (el) => {
 };
 
 const validatePhoneNumber = () => {
-    if(phoneNumberInputHtml.value === "") {
-        return isRequired(phoneNumberInputHtml)
+    if (phoneNumberInputHtml.value === "") {
+        return isRequired(phoneNumberInputHtml);
     } else {
         return isNumber(phoneNumberInputHtml);
     }
 };
 
 const validateEmail = () => {
-    if(emailInputHtml.value === "") {
-        return isRequired(emailInputHtml)
+    if (emailInputHtml.value === "") {
+        return isRequired(emailInputHtml);
     } else {
         return isEmail(emailInputHtml);
     }
@@ -465,24 +476,22 @@ const handleInfoUser = () => {
             (district) => district.code === +addressDistrictHtml.value
         );
         const ward = wards.find((ward) => ward.code === +addressWardHtml.value);
-        dateTime = new Date();
+        date = new Date();
 
-        const infoClient = {
-            id: createRandomID(),
-            fullName: firstNameInputHtml.value + " " + lastNameInputHtml.value,
+        const bill = {
+            id: createID(),
+            fullName: `${firstNameInputHtml.value} ${lastNameInputHtml.value}`,
             email: emailInputHtml.value,
             phoneNumber: phoneNumberInputHtml.value,
             address: `${addressInputHtml.value}, ${ward.name}, ${district.name}, ${province.name}`,
-            date: `${dateTime.getDate()}/${
-                dateTime.getMonth() + 1
-            }/${dateTime.getFullYear()}`,
+            date: new Intl.DateTimeFormat("en-GB").format(date),
             note: noteInputHtml.value,
         };
-        console.log(infoClient);
-    } 
+        return bill;
+    }
 };
 
-// bai 14
+// bai 14 ok
 const getListBill = () => {
     fetch("http://localhost:3000/bills")
         .then((res) => res.json())
@@ -528,4 +537,10 @@ const deleteBill = (id) => {
     fetch(`http://localhost:3000/bills/${id}`, {
         method: "DELETE",
     }).then((response) => response.json());
+};
+
+// bai 15
+const handleBuy = () => {
+    const user = handleInfoUser();
+    console.log(user);
 };

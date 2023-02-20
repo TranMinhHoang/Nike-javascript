@@ -132,7 +132,7 @@
             </div>
         </div>
     </div>
-    <div class="modal">
+    <div class="modal hidden">
         <div onclick="closeModal()" class="modal-overlay">
         </div>
         <div class="modal-body">
@@ -210,12 +210,17 @@
 
                 <div class="auth-form-footer">
                     <button onclick="closeModal()" class="auth-form-close auth-form-btn">Hủy</button>
-                    <button onclick="handleInfoUser()" class="auth-form-confirm auth-form-btn">Xác nhận</button>
+                    <button onclick="handleBuy()" class="auth-form-confirm auth-form-btn">Xác nhận</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="./main.js"></script>
+    <!-- <script src="./main.js"></script> -->
+    <script type="module" src="./assets/javascript/common.js"></script>
+    <script type="module" src="./assets/javascript/cart.js"></script>
+    <script type="module" src="./assets/javascript/home.js"></script>
+    <script type="module" src="./assets/javascript/bill.js"></script>
+    <script type="module" src="./assets/javascript/menu.js"></script>
 </body>
 
 </html>
