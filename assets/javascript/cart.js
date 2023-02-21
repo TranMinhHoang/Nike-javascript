@@ -1,9 +1,21 @@
-import { listData, getLocalStorage, setLocalStorage, keyLocalStorageItemCart } from "./common.js";
+import { listData, getLocalStorage, setLocalStorage, keyLocalStorageItemCart, getParentElement } from "./common.js";
+// import { goToCartPage } from "./menu.js";
 // Bai 4
 const listCart = getLocalStorage(keyLocalStorageItemCart);
 
 // bai 5
 const countCartHtml = document.querySelector(".navbar-item-notice");
+
+// bai 6
+const navbarCartHtml = document.querySelector("#cart");
+const navbarHomeHtml = document.querySelector("#home");
+const homePageHtml = document.querySelector(".home-page");
+const cartPageHtml = document.querySelector(".cart-page");
+const existingCartHtml = document.querySelector(".existing-cart");
+const emptyCartHtml = document.querySelector(".empty-cart");
+const buyCartHtml = document.querySelector(".total-price-cart");
+const listCartHtml = document.querySelector(".cart-list");
+const totalPriceHtml = document.querySelector(".total-price-cart-text");
 
 const cart = {
     idSP: null,
@@ -68,6 +80,117 @@ const detailCart = () => {
     return detailListCart;
 };
 
+const goToCartPage = () => {
+    homePageHtml.classList.add("hidden");
+    navbarHomeHtml.classList.remove("active");
+    cartPageHtml.classList.remove("hidden");
+    navbarCartHtml.classList.add("active");
+
+    if (listCart.length > 0) {
+        emptyCartHtml.classList.add("hidden");
+        existingCartHtml.classList.remove("hidden");
+        buyCartHtml.classList.remove("hidden");
+        // const itemCart = listCart.map((cart) => {
+            //     const infoProduct = listData.find(
+                //         (product) => cart.idSP === product.id
+        //     );
+
+        //     return `<li class="cart-item">
+        //     <div class="cart-item-info">
+        //         <img class="cart-item-img" src="${infoProduct.image}" alt="">
+        //         <div>
+        //             <h1 class="cart-item-name">${infoProduct.name}</h1>
+        //             <p class="cart-item-quantity">Quantity: ${
+        //                 infoProduct.quantity
+        //             }</p>
+        //         </div>
+        //     </div>
+        //     <div class="cart-item-states">
+        //         <div class="cart-item-state">
+        //             <i onclick="minusItem(${
+        //                 infoProduct.id
+        //             })" class="plus-minus-icon fa-solid fa-minus"></i>
+        //             ${cart.soLuong}
+        //             <i onclick="plusItem(${
+            //                 infoProduct.id
+            //             })" class="plus-minus-icon fa-solid fa-plus"></i>
+            //         </div>
+            //         <div class="cart-item-state">$${infoProduct.price}</div>
+        //         <div class="cart-item-state">$${priceCart.get(cart.idSP)}</div>
+        //         <div class="cart-item-state">
+        //             <i onclick="removeItem(${
+        //                 infoProduct.id
+        //             })" class="clear-item-icon fa-regular fa-circle-xmark"></i>
+        //         </div>
+        //     </div>
+        // </li>`;
+        // });
+        const detailItemCart = detailCart()
+        const itemCart = detailItemCart.map(cart => (
+            `<li class="cart-item" value="${cart.id}">
+            <div class="cart-item-info">
+                <img class="cart-item-img" src="${cart.image}" alt="">
+                <div>
+                    <h1 class="cart-item-name">${cart.name}</h1>
+                    <p class="cart-item-quantity">Quantity: ${
+                        cart.quantity
+                    }</p>
+                </div>
+            </div>
+            <div class="cart-item-states">
+                <div class="cart-item-state">
+                    <i onclick="minusItem(${
+                        cart.id
+                    })" class="plus-minus-icon fa-solid fa-minus"></i>
+                    ${cart.buyCount}
+                    <i onclick="plusItem(${
+                        cart.id
+                    })" class="plus-minus-icon fa-solid fa-plus"></i>
+                </div>
+                <div class="cart-item-state">$${cart.subPrice}</div>
+                <div class="cart-item-state">$${cart.totalPrice}</div>
+                <div class="cart-item-state">
+                    <i class="clear-item-icon fa-regular fa-circle-xmark"></i>
+                </div>
+            </div>
+        </li>`
+        ))
+        listCartHtml.innerHTML = itemCart.join(" ");
+        totalPriceHtml.innerHTML = "total: $" + priceCart.get("total");
+        const minusCountHtml = document.querySelectorAll('.fa-minus')
+        const plusCountHtml = document.querySelectorAll('.fa-plus')
+        const clearItemHtml = document.querySelectorAll('.clear-item-icon')
+        
+        minusCountHtml.forEach((item) => {
+            item.onclick = () => {
+                minusItem(getParentElement(item, 'li').value);
+            };
+        });
+
+        plusCountHtml.forEach((item) => {
+            item.onclick = () => {
+                plusItem(getParentElement(item, 'li').value);
+            };
+        });
+
+        clearItemHtml.forEach((item) => {
+            item.onclick = () => {
+                removeItem(getParentElement(item, 'li').value);
+            };
+        });
+        
+    } else {
+        existingCartHtml.classList.add("hidden");
+        buyCartHtml.classList.add("hidden");
+        emptyCartHtml.classList.remove("hidden");
+    }
+    
+};
+
+navbarCartHtml.onclick = function() {
+    goToCartPage()
+}
+
 const plusItem = (id) => {
     const item = listCart.find((cart) => cart.idSP === id);
     const infoItem = listData.find((data) => data.id === item.idSP);
@@ -99,4 +222,4 @@ const removeItem = (id) => {
     goToCartPage();
 };
 
-export {addSP, listCart, priceCart, plusItem, minusItem, removeItem, detailCart}
+export { addSP, priceCart, detailCart }

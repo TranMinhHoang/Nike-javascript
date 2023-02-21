@@ -49,7 +49,6 @@ const listData = [
         price: 500,
         quantity: 7,
     },
-    
 ];
 
 const keyLocalStorageListSP = "DANHSACHSP";
@@ -64,4 +63,11 @@ const getLocalStorage = (key) => {
     return JSON.parse(localStorage.getItem(key)) || [];
 };
 
-export {listData, keyLocalStorageListSP, keyLocalStorageItemCart, setLocalStorage, getLocalStorage}
+const getParentElement = (element, selector) => {
+    if (element.parentElement.matches(selector)) {
+        return element.parentElement;
+    }
+    return getParentElement(element.parentElement, selector);
+};
+
+export {listData, keyLocalStorageListSP, keyLocalStorageItemCart, setLocalStorage, getLocalStorage, getParentElement}

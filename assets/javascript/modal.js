@@ -1,9 +1,29 @@
+import { getParentElement } from "./common.js";
+import { priceCart, detailCart } from "./cart.js";
+
 // Bai 7
 const modalHtml = document.querySelector(".modal");
+const buyBtnHtml = document.querySelector(".buy-btn");
+const closeModalHtml = document.querySelectorAll(".close-modal");
 
 // bai 9
 const listDistrictHtml = document.querySelector("#district");
 const listWardHtml = document.querySelector("#ward");
+
+// bai 11
+const nameInputHtml = document.querySelectorAll(".name-input");
+
+const firstNameInputHtml = document.getElementById("firstname");
+const lastNameInputHtml = document.getElementById("lastname");
+const emailInputHtml = document.getElementById("email");
+const phoneNumberInputHtml = document.getElementById("phonenumber");
+const addressProvinceHtml = document.getElementById("province");
+const addressDistrictHtml = document.getElementById("district");
+const addressWardHtml = document.getElementById("ward");
+const addressInputHtml = document.getElementById("numberaddress");
+const noteInputHtml = document.getElementById("notemessage");
+
+const confirmBtnHtml = document.querySelector(".auth-form-confirm")
 
 const openModal = () => {
     modalHtml.classList.remove("hidden");
@@ -12,6 +32,16 @@ const openModal = () => {
 const closeModal = () => {
     modalHtml.classList.add("hidden");
 };
+
+buyBtnHtml.onclick = () => {
+    openModal();
+};
+
+closeModalHtml.forEach((element) => {
+    element.onclick = () => {
+        closeModal();
+    };
+});
 
 // bai 8
 let provinces = [];
@@ -92,32 +122,57 @@ const createID = () => {
 };
 
 // bai 11
-const firstNameInputHtml = document.getElementById("firstname");
-const lastNameInputHtml = document.getElementById("lastname");
-const emailInputHtml = document.getElementById("email");
-const phoneNumberInputHtml = document.getElementById("phonenumber");
-const addressProvinceHtml = document.getElementById("province");
-const addressDistrictHtml = document.getElementById("district");
-const addressWardHtml = document.getElementById("ward");
-const addressInputHtml = document.getElementById("numberaddress");
-const noteInputHtml = document.getElementById("notemessage");
-
 const regex = {
     email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
     number: /^[0-9]+$/,
 };
 
-const getParentElement = (childElement, querySelector) => {
-    const targetElement =
-        childElement.parentElement.querySelector(querySelector);
-    if (targetElement !== null) {
-        return targetElement;
-    }
-    return getParentElement(childElement.parentElement, querySelector);
-};
 
-const isRequired = (el) => {
-    const errorMessageHtml = getParentElement(el, ".auth-form-error");
+const validator = (() => {
+    nameInputHtml.forEach((element) => {
+        element.onblur = () => {
+            validateName(element);
+        };
+        element.onkeypress = () => {
+            validateName(element);
+        };
+    });
+    emailInputHtml.onblur = () => {
+        validateEmail(emailInputHtml)
+    }
+    emailInputHtml.onkeyup = () => {
+        validateEmail(emailInputHtml)
+    }
+    
+    phoneNumberInputHtml.onblur = () => {
+        validatePhoneNumber(phoneNumberInputHtml)
+    }
+    phoneNumberInputHtml.onkeyup = () => {
+        validatePhoneNumber(phoneNumberInputHtml)
+    }
+    
+    addressProvinceHtml.onchange = () => {
+        handleChangeProvince()
+    }
+    addressDistrictHtml.onchange = () => {
+        handleChangeDistrict()
+    }
+    addressWardHtml.onchange = () => {
+        validateAddress()
+    }
+    addressInputHtml.onblur = () => {
+        validateAddress()
+    }
+    addressInputHtml.onkeyup = () => {
+        validateAddress()
+    }
+})()
+
+const validateName = (el) => {
+    const errorMessageHtml = getParentElement(
+        el,
+        ".auth-form-input-col-2"
+    ).querySelector(".auth-form-error");
     if (el.value !== "") {
         errorMessageHtml.innerHTML = null;
         return true;
@@ -127,49 +182,47 @@ const isRequired = (el) => {
     }
 };
 
-const isNumber = (el) => {
-    const errorMessageHtml = getParentElement(el, ".auth-form-error");
-    if (regex.number.test(el.value)) {
+const validateEmail = (element) => {
+    const errorMessageHtml = getParentElement(
+        element,
+        ".auth-form-group"
+    ).querySelector(".auth-form-error");
+    if (element.value === "") {
+        errorMessageHtml.innerHTML = `Vui lòng nhập ${element.name}!`;
+        return false;
+    }
+    if (regex.email.test(element.value)) {
         errorMessageHtml.innerHTML = null;
         return true;
     } else {
-        errorMessageHtml.innerHTML = `Nhập sai ${el.name}!`;
+        errorMessageHtml.innerHTML = `Nhập sai ${element.name}!`;
         return false;
     }
 };
 
-const isEmail = (el) => {
-    const errorMessageHtml = getParentElement(el, ".auth-form-error");
-    if (regex.email.test(el.value)) {
+const validatePhoneNumber = (element) => {
+    const errorMessageHtml = getParentElement(
+        element,
+        ".auth-form-group"
+    ).querySelector(".auth-form-error");
+    if (element.value === "") {
+        errorMessageHtml.innerHTML = `Vui lòng nhập ${element.name}!`;
+        return false;
+    } 
+    if (regex.number.test(element.value)) {
         errorMessageHtml.innerHTML = null;
         return true;
     } else {
-        errorMessageHtml.innerHTML = `Nhập sai ${el.name}!`;
+        errorMessageHtml.innerHTML = `Nhập sai ${element.name}!`;
         return false;
-    }
-};
-
-const validatePhoneNumber = () => {
-    if (phoneNumberInputHtml.value === "") {
-        return isRequired(phoneNumberInputHtml);
-    } else {
-        return isNumber(phoneNumberInputHtml);
-    }
-};
-
-const validateEmail = () => {
-    if (emailInputHtml.value === "") {
-        return isRequired(emailInputHtml);
-    } else {
-        return isEmail(emailInputHtml);
     }
 };
 
 const validateAddress = () => {
     const errorMessageHtml = getParentElement(
         addressInputHtml,
-        ".auth-form-error"
-    );
+        ".auth-form-group"
+        ).querySelector(".auth-form-error");
 
     if (
         addressProvinceHtml.value !== "" &&
@@ -180,7 +233,7 @@ const validateAddress = () => {
         errorMessageHtml.innerHTML = null;
         return true;
     } else {
-        errorMessageHtml.innerHTML = "Vui lòng điền đầy đủ thông tin địa chỉ!";
+        errorMessageHtml.innerHTML = "Vui lòng nhập đầy đủ thông tin địa chỉ!";
         return false;
     }
 };
@@ -195,18 +248,18 @@ const handleChangeDistrict = () => {
     validateAddress();
 };
 
-const handleInfoUser = () => {
-    isRequired(firstNameInputHtml);
-    isRequired(lastNameInputHtml);
-    validateEmail();
-    validatePhoneNumber();
+const confirmBill = () => {
+    validateName(firstNameInputHtml)
+    validateName(lastNameInputHtml)
+    validateEmail(emailInputHtml);
+    validatePhoneNumber(phoneNumberInputHtml);
     validateAddress();
 
     if (
-        isRequired(firstNameInputHtml) &&
-        isRequired(lastNameInputHtml) &&
-        validateEmail() &&
-        validatePhoneNumber() &&
+        validateName(firstNameInputHtml) &&
+        validateName(lastNameInputHtml) &&
+        validateEmail(emailInputHtml) &&
+        validatePhoneNumber(phoneNumberInputHtml) &&
         validateAddress()
     ) {
         const province = provinces.find(
@@ -216,7 +269,7 @@ const handleInfoUser = () => {
             (district) => district.code === +addressDistrictHtml.value
         );
         const ward = wards.find((ward) => ward.code === +addressWardHtml.value);
-        date = new Date();
+        const date = new Date();
 
         const bill = {
             id: createID(),
@@ -226,7 +279,16 @@ const handleInfoUser = () => {
             address: `${addressInputHtml.value}, ${ward.name}, ${district.name}, ${province.name}`,
             date: new Intl.DateTimeFormat("en-GB").format(date),
             note: noteInputHtml.value,
+            cart: {
+                detailCart: detailCart(),
+                total: priceCart.get('total')
+            }
         };
+        console.log(bill)
         return bill;
     }
 };
+
+confirmBtnHtml.onclick = () => {
+    confirmBill()
+}

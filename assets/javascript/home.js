@@ -12,6 +12,14 @@ setLocalStorage(keyLocalStorageListSP, listData);
 // Bai 3
 const listProductHtml = document.querySelector(".product-list");
 
+const BackHomeBtnHtml = document.querySelector('.back-home')
+
+// bai 6
+const navbarCartHtml = document.querySelector("#cart");
+const navbarHomeHtml = document.querySelector("#home");
+const homePageHtml = document.querySelector(".home-page");
+const cartPageHtml = document.querySelector(".cart-page");
+
 const getListData = () => {
     const listData = getLocalStorage(keyLocalStorageListSP);
     const product = listData.map(
@@ -29,13 +37,30 @@ const getListData = () => {
     </li>`
     );
     listProductHtml.innerHTML = product.join("");
-    const productsHtml = document.querySelectorAll(".product-add-cart");
-    productsHtml.forEach((product) => {
-        product.onclick = () => {
-            addSP(product.parentElement.value);
+    const addBtnHtml = document.querySelectorAll(".product-add-cart");
+    addBtnHtml.forEach((btn) => {
+        btn.onclick = () => {
+            addSP(btn.parentElement.value);
         };
     });
 };
 getListData();
+
+const goToHomePage = () => {
+    homePageHtml.classList.remove("hidden");
+    cartPageHtml.classList.add("hidden");
+    navbarHomeHtml.classList.add("active");
+    navbarCartHtml.classList.remove("active");
+    getListData();
+};
+
+navbarHomeHtml.onclick = () => {
+    goToHomePage();
+};
+
+BackHomeBtnHtml.onclick = () => {
+    goToHomePage()
+}
+
 
 export default getListData;
