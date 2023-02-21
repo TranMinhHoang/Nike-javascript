@@ -1,12 +1,123 @@
 {
-    "bills": [
-        {
-             "id": 1, 
-             "date": "", 
-             "fullname": "",
-             "email": "",
-             "phoneNumber": "",
-             "address": ""
-        }
-    ]
+  "bills": [
+    {
+      "id": "20231211676959791567",
+      "fullName": "hoang a",
+      "email": "hoang@gmail.com",
+      "phoneNumber": "01345",
+      "address": "so 23, Xã Pả Vi, Huyện Mèo Vạc, Tỉnh Hà Giang",
+      "date": "21/02/2023",
+      "note": "abc",
+      "cart": {
+        "detailCart": [
+          {
+            "id": 3,
+            "name": "Nike Streakfly Road Racing Shoes",
+            "image": "./assets/images/home/NikeStreakflyRoadRacingShoes.png",
+            "quantity": 15,
+            "buyCount": 15,
+            "subPrice": 300,
+            "totalPrice": 4500
+          },
+          {
+            "id": 1,
+            "name": "Nike Air Max 97",
+            "image": "./assets/images/home/NikeAirMax97.webp",
+            "quantity": 10,
+            "buyCount": 10,
+            "subPrice": 300,
+            "totalPrice": 3000
+          }
+        ],
+        "total": 7500
+      }
+    },
+    {
+      "id": "20231211676960155434",
+      "fullName": "Tran Minh Hoang",
+      "email": "hoang01697@gmail.com",
+      "phoneNumber": "0135489647",
+      "address": "so 56 Ngo Gia Tu, Phường Giang Biên, Quận Long Biên, Thành phố Hà Nội",
+      "date": "21/02/2023",
+      "note": "",
+      "cart": {
+        "detailCart": [
+          {
+            "id": 1,
+            "name": "Nike Air Max 97",
+            "image": "./assets/images/home/NikeAirMax97.webp",
+            "quantity": 10,
+            "buyCount": 1,
+            "subPrice": 300,
+            "totalPrice": 300
+          },
+          {
+            "id": 5,
+            "name": "Nike Dunk",
+            "image": "./assets/images/home/NikeDunk.png",
+            "quantity": 4,
+            "buyCount": 1,
+            "subPrice": 100,
+            "totalPrice": 100
+          }
+        ],
+        "total": 400
+      }
+    },
+    {
+      "id": "20231211676960639818",
+      "fullName": "hoang tran",
+      "email": "hoang@gmail.com",
+      "phoneNumber": "01658783",
+      "address": "so 45, Thị trấn Phó Bảng, Huyện Đồng Văn, Tỉnh Hà Giang",
+      "date": "21/02/2023",
+      "note": "",
+      "cart": {
+        "detailCart": [
+          {
+            "id": 1,
+            "name": "Nike Air Max 97",
+            "image": "./assets/images/home/NikeAirMax97.webp",
+            "quantity": 10,
+            "buyCount": 2,
+            "subPrice": 300,
+            "totalPrice": 600
+          }
+        ],
+        "total": 600
+      }
+    },
+    {
+      "id": "20231211676972051546",
+      "fullName": "nam nguyen",
+      "email": "nam@gmail.com",
+      "phoneNumber": "0467486",
+      "address": "so 34, Phường Hàng Buồm, Quận Hoàn Kiếm, Thành phố Hà Nội",
+      "date": "21/02/2023",
+      "note": "abc",
+      "cart": {
+        "detailCart": [
+          {
+            "id": 2,
+            "name": "Nike Air Force 1",
+            "image": "./assets/images/home/NikeAirForce1.jfif",
+            "quantity": 20,
+            "buyCount": 1,
+            "subPrice": 400,
+            "totalPrice": 400
+          },
+          {
+            "id": 3,
+            "name": "Nike Streakfly Road Racing Shoes",
+            "image": "./assets/images/home/NikeStreakflyRoadRacingShoes.png",
+            "quantity": 15,
+            "buyCount": 1,
+            "subPrice": 300,
+            "totalPrice": 300
+          }
+        ],
+        "total": 700
+      }
+    }
+  ]
 }

@@ -192,4 +192,4 @@ const removeItem = (id) => {
     goToCartPage();
 };
 
-export { addSP, priceCart, detailCart }
+export { addSP, priceCart, detailCart, handlePriceCart, goToCartPage }

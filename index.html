@@ -14,16 +14,16 @@
     <div class="app">
         <div class="header">
             <div class="header-wrap">
-                <div onclick="goToHomePage()" class="logo">
+                <div class="logo scr-go-home">
                     <img src="https://inkythuatso.com/uploads/images/2021/12/nike-jacket-big-logo-inkythuatso-20-10-08-13.jpg"
                         alt="">
                     <p class="logo-name">Nike</p>
                 </div>
                 <ul class="navbar-list">
-                    <li onclick="goToHomePage()" id="home" class="navbar-item active">Home</li>
+                    <li id="home" class="navbar-item active scr-go-home">Home</li>
                     <li id="about" class="navbar-item">About</li>
                     <li id="bills" class="navbar-item">Bills</li>
-                    <li onclick="goToCartPage()" id="cart" class="navbar-item" >
+                    <li id="cart" class="navbar-item" >
                         <div class="navbar-item-cart">
                             <i class=" fa-solid fa-cart-shopping"></i>
                             <span class="navbar-item-notice"></span>
@@ -120,7 +120,7 @@
                 </div >
 
                 <div class="cart-footer">
-                    <button class="back-home">
+                    <button class="back-home scr-go-home">
                         <i class="fa-solid fa-arrow-left"></i>
                         Back to Shopping
                     </button>
@@ -134,13 +134,13 @@
     </div>
 
     <div class="modal-auth hidden ">
-        <div class="modal-overlay close-modal">
+        <div class="modal-overlay scr-close-modal">
         </div>
         <div class="modal-body">
             <div class="auth-form">
                 <div class="auth-form-header">
                     <h2 class="auth-form-heading">Thông tin người mua</h2>
-                    <i class="close-icon close-modal fa-solid fa-xmark"></i>
+                    <i class="close-icon scr-close-modal fa-solid fa-xmark"></i>
                 </div>
 
                 <div class="auth-form-body">
@@ -210,7 +210,7 @@
                 </div>
 
                 <div class="auth-form-footer">
-                    <button class="auth-form-close auth-form-btn close-modal">Hủy</button>
+                    <button class="auth-form-close auth-form-btn scr-close-modal">Hủy</button>
                     <button onclick="handleBuy()" class="auth-form-confirm auth-form-btn">Xác nhận</button>
                 </div>
             </div>
@@ -218,14 +218,14 @@
     </div>
     
     <div class="modal-warning hidden">
-        <div class="modal-overlay close-modal">
+        <div class="modal-overlay scr-close-modal">
         </div>
         <div class="modal-body modal-body-warning">
             <div class="modal-form">
                 <div class="warning-form-header">
                     <i class="warning-header-icon fa-solid fa-circle-exclamation"></i>
                     <h2 class="warning-form-heading">Thông báo</h2>
-                    <i class="close-icon close-modal fa-solid fa-xmark"></i>
+                    <i class="close-icon scr-close-modal fa-solid fa-xmark"></i>
                 </div>
 
                 <div class="warning-form-body">
@@ -234,7 +234,7 @@
                 </div>
 
                 <div class="warning-form-footer">
-                    <button class="warning-form-confirm close-modal">Xác nhận</button>
+                    <button class="warning-form-confirm scr-close-modal">Xác nhận</button>
                 </div>
             </div>
         </div>

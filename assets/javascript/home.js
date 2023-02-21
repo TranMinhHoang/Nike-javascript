@@ -12,7 +12,7 @@ setLocalStorage(keyLocalStorageListSP, listData);
 // Bai 3
 const listProductHtml = document.querySelector(".product-list");
 
-const BackHomeBtnHtml = document.querySelector('.back-home')
+const goToHomeHtml = document.querySelectorAll('.scr-go-home')
 
 // bai 6
 const navbarCartHtml = document.querySelector("#cart");
@@ -54,13 +54,11 @@ const goToHomePage = () => {
     getListData();
 };
 
-navbarHomeHtml.onclick = () => {
-    goToHomePage();
-};
-
-BackHomeBtnHtml.onclick = () => {
-    goToHomePage()
-}
+goToHomeHtml.forEach(element => {
+    element.onclick = () => {
+        goToHomePage()
+    }
+})
 
 
 export default getListData;

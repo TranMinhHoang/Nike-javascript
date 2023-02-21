@@ -1,3 +1,4 @@
+
 // bai 14
 const getListBill = () => {
     fetch("http://localhost:3000/bills")
@@ -21,7 +22,9 @@ const postBill = (data) => {
         },
         body: JSON.stringify(data),
     })
-        .then((response) => response.json())
+        .then((response) => {
+            return response.json()
+        })
         .then((data) => {
             console.log("Success:", data);
         })
@@ -45,3 +48,5 @@ const deleteBill = (id) => {
         method: "DELETE",
     }).then((response) => response.json());
 };
+
+export {postBill}

@@ -1,11 +1,21 @@
-import { getParentElement } from "./common.js";
-import { priceCart, detailCart } from "./cart.js";
+import {
+    getParentElement,
+    setLocalStorage,
+    keyLocalStorageItemCart,
+} from "./common.js";
+import {
+    priceCart,
+    detailCart,
+    handlePriceCart,
+    goToCartPage,
+} from "./cart.js";
+import { postBill } from "./bill.js";
 
 // Bai 7
 const modalAuthHtml = document.querySelector(".modal-auth");
 const modalWarningHtml = document.querySelector(".modal-warning");
 const buyBtnHtml = document.querySelector(".buy-btn");
-const closeModalAuthHtml = document.querySelectorAll(".close-modal");
+const closeModalAuthHtml = document.querySelectorAll(".scr-close-modal");
 
 // bai 9
 const listDistrictHtml = document.querySelector("#district");
@@ -24,7 +34,7 @@ const addressWardHtml = document.getElementById("ward");
 const addressInputHtml = document.getElementById("numberaddress");
 const noteInputHtml = document.getElementById("notemessage");
 
-const confirmBtnHtml = document.querySelector(".auth-form-confirm")
+const confirmBtnHtml = document.querySelector(".auth-form-confirm");
 
 const openModalAuth = () => {
     modalAuthHtml.classList.remove("hidden");
@@ -49,11 +59,9 @@ buyBtnHtml.onclick = () => {
 closeModalAuthHtml.forEach((element) => {
     element.onclick = () => {
         closeModalAuth();
-        closeModalWarning()
+        closeModalWarning();
     };
 });
-
-
 
 // bai 8
 let provinces = [];
@@ -139,7 +147,6 @@ const regex = {
     number: /^[0-9]+$/,
 };
 
-
 const validator = (() => {
     nameInputHtml.forEach((element) => {
         element.onblur = () => {
@@ -150,39 +157,39 @@ const validator = (() => {
         };
     });
     emailInputHtml.onblur = () => {
-        validateEmail(emailInputHtml)
-    }
+        validateEmail(emailInputHtml);
+    };
     emailInputHtml.onkeyup = () => {
-        validateEmail(emailInputHtml)
-    }
-    
+        validateEmail(emailInputHtml);
+    };
+
     phoneNumberInputHtml.onblur = () => {
-        validatePhoneNumber(phoneNumberInputHtml)
-    }
+        validatePhoneNumber(phoneNumberInputHtml);
+    };
     phoneNumberInputHtml.onkeyup = () => {
-        validatePhoneNumber(phoneNumberInputHtml)
-    }
-    
+        validatePhoneNumber(phoneNumberInputHtml);
+    };
+
     addressProvinceHtml.onchange = () => {
-        handleChangeProvince()
-    }
+        handleChangeProvince();
+    };
     addressDistrictHtml.onchange = () => {
-        handleChangeDistrict()
-    }
+        handleChangeDistrict();
+    };
     addressWardHtml.onchange = () => {
-        validateAddress()
-    }
+        validateAddress();
+    };
     addressInputHtml.onblur = () => {
-        validateAddress()
-    }
+        validateAddress();
+    };
     addressInputHtml.onkeyup = () => {
-        validateAddress()
-    }
+        validateAddress();
+    };
 
     confirmBtnHtml.onclick = () => {
-        confirmBill()
-    }
-})()
+        createBill();
+    };
+})();
 
 const validateName = (el) => {
     const errorMessageHtml = getParentElement(
@@ -224,7 +231,7 @@ const validatePhoneNumber = (element) => {
     if (element.value === "") {
         errorMessageHtml.innerHTML = `Vui lòng nhập ${element.name}!`;
         return false;
-    } 
+    }
     if (regex.number.test(element.value)) {
         errorMessageHtml.innerHTML = null;
         return true;
@@ -238,7 +245,7 @@ const validateAddress = () => {
     const errorMessageHtml = getParentElement(
         addressInputHtml,
         ".auth-form-group"
-        ).querySelector(".auth-form-error");
+    ).querySelector(".auth-form-error");
 
     if (
         addressProvinceHtml.value !== "" &&
@@ -264,13 +271,13 @@ const handleChangeDistrict = () => {
     validateAddress();
 };
 
-const confirmBill = () => {
-    validateName(firstNameInputHtml)
-    validateName(lastNameInputHtml)
+const infoBill = () => {
+    validateName(firstNameInputHtml);
+    validateName(lastNameInputHtml);
     validateEmail(emailInputHtml);
     validatePhoneNumber(phoneNumberInputHtml);
     validateAddress();
-    
+
     if (
         validateName(firstNameInputHtml) &&
         validateName(lastNameInputHtml) &&
@@ -286,7 +293,7 @@ const confirmBill = () => {
         );
         const ward = wards.find((ward) => ward.code === +addressWardHtml.value);
         const date = new Date();
-        
+
         const bill = {
             id: createID(),
             fullName: `${firstNameInputHtml.value} ${lastNameInputHtml.value}`,
@@ -297,11 +304,20 @@ const confirmBill = () => {
             note: noteInputHtml.value,
             cart: {
                 detailCart: detailCart(),
-                total: priceCart.get('total')
-            }
+                total: priceCart.get("total"),
+            },
         };
-        console.log(bill)
         return bill;
     }
 };
 
+const createBill = async () => {
+    const bill = infoBill();
+    const newCart = [];
+    if (bill) {
+        await postBill(bill);
+        setLocalStorage(keyLocalStorageItemCart, newCart);
+        handlePriceCart();
+        goToCartPage();
+    }
+};
