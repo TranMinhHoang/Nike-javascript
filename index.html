@@ -132,7 +132,8 @@
             </div>
         </div>
     </div>
-    <div class="modal hidden ">
+
+    <div class="modal-auth hidden ">
         <div class="modal-overlay close-modal">
         </div>
         <div class="modal-body">
@@ -215,7 +216,30 @@
             </div>
         </div>
     </div>
-    <!-- <script src="./main.js"></script> -->
+    
+    <div class="modal-warning hidden">
+        <div class="modal-overlay close-modal">
+        </div>
+        <div class="modal-body modal-body-warning">
+            <div class="modal-form">
+                <div class="warning-form-header">
+                    <i class="warning-header-icon fa-solid fa-circle-exclamation"></i>
+                    <h2 class="warning-form-heading">Thông báo</h2>
+                    <i class="close-icon close-modal fa-solid fa-xmark"></i>
+                </div>
+
+                <div class="warning-form-body">
+                    <i class="warning-body-icon fa-solid fa-triangle-exclamation"></i>
+                    <p class="warning-form-text">Sản phẩm mua không được vượt quá số lượng trong kho!</p>
+                </div>
+
+                <div class="warning-form-footer">
+                    <button class="warning-form-confirm close-modal">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="./assets/javascript/common.js"></script>
     <script type="module" src="./assets/javascript/cart.js"></script>
     <script type="module" src="./assets/javascript/home.js"></script>

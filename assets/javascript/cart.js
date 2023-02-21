@@ -17,6 +17,8 @@ const buyCartHtml = document.querySelector(".total-price-cart");
 const listCartHtml = document.querySelector(".cart-list");
 const totalPriceHtml = document.querySelector(".total-price-cart-text");
 
+const modalWarningHtml = document.querySelector(".modal-warning")
+
 const cart = {
     idSP: null,
     soLuong: 0,
@@ -90,41 +92,7 @@ const goToCartPage = () => {
         emptyCartHtml.classList.add("hidden");
         existingCartHtml.classList.remove("hidden");
         buyCartHtml.classList.remove("hidden");
-        // const itemCart = listCart.map((cart) => {
-            //     const infoProduct = listData.find(
-                //         (product) => cart.idSP === product.id
-        //     );
-
-        //     return `<li class="cart-item">
-        //     <div class="cart-item-info">
-        //         <img class="cart-item-img" src="${infoProduct.image}" alt="">
-        //         <div>
-        //             <h1 class="cart-item-name">${infoProduct.name}</h1>
-        //             <p class="cart-item-quantity">Quantity: ${
-        //                 infoProduct.quantity
-        //             }</p>
-        //         </div>
-        //     </div>
-        //     <div class="cart-item-states">
-        //         <div class="cart-item-state">
-        //             <i onclick="minusItem(${
-        //                 infoProduct.id
-        //             })" class="plus-minus-icon fa-solid fa-minus"></i>
-        //             ${cart.soLuong}
-        //             <i onclick="plusItem(${
-            //                 infoProduct.id
-            //             })" class="plus-minus-icon fa-solid fa-plus"></i>
-            //         </div>
-            //         <div class="cart-item-state">$${infoProduct.price}</div>
-        //         <div class="cart-item-state">$${priceCart.get(cart.idSP)}</div>
-        //         <div class="cart-item-state">
-        //             <i onclick="removeItem(${
-        //                 infoProduct.id
-        //             })" class="clear-item-icon fa-regular fa-circle-xmark"></i>
-        //         </div>
-        //     </div>
-        // </li>`;
-        // });
+        
         const detailItemCart = detailCart()
         const itemCart = detailItemCart.map(cart => (
             `<li class="cart-item" value="${cart.id}">
@@ -199,6 +167,8 @@ const plusItem = (id) => {
         setLocalStorage(keyLocalStorageItemCart, listCart);
         handlePriceCart();
         goToCartPage();
+    } else {
+        modalWarningHtml.classList.remove('hidden')
     }
 };
 

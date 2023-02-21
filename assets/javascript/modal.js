@@ -2,9 +2,10 @@ import { getParentElement } from "./common.js";
 import { priceCart, detailCart } from "./cart.js";
 
 // Bai 7
-const modalHtml = document.querySelector(".modal");
+const modalAuthHtml = document.querySelector(".modal-auth");
+const modalWarningHtml = document.querySelector(".modal-warning");
 const buyBtnHtml = document.querySelector(".buy-btn");
-const closeModalHtml = document.querySelectorAll(".close-modal");
+const closeModalAuthHtml = document.querySelectorAll(".close-modal");
 
 // bai 9
 const listDistrictHtml = document.querySelector("#district");
@@ -25,23 +26,34 @@ const noteInputHtml = document.getElementById("notemessage");
 
 const confirmBtnHtml = document.querySelector(".auth-form-confirm")
 
-const openModal = () => {
-    modalHtml.classList.remove("hidden");
+const openModalAuth = () => {
+    modalAuthHtml.classList.remove("hidden");
 };
 
-const closeModal = () => {
-    modalHtml.classList.add("hidden");
+const closeModalAuth = () => {
+    modalAuthHtml.classList.add("hidden");
+};
+
+const openModalWarning = () => {
+    modalWarningHtml.classList.remove("hidden");
+};
+
+const closeModalWarning = () => {
+    modalWarningHtml.classList.add("hidden");
 };
 
 buyBtnHtml.onclick = () => {
-    openModal();
+    openModalAuth();
 };
 
-closeModalHtml.forEach((element) => {
+closeModalAuthHtml.forEach((element) => {
     element.onclick = () => {
-        closeModal();
+        closeModalAuth();
+        closeModalWarning()
     };
 });
+
+
 
 // bai 8
 let provinces = [];
@@ -166,6 +178,10 @@ const validator = (() => {
     addressInputHtml.onkeyup = () => {
         validateAddress()
     }
+
+    confirmBtnHtml.onclick = () => {
+        confirmBill()
+    }
 })()
 
 const validateName = (el) => {
@@ -254,7 +270,7 @@ const confirmBill = () => {
     validateEmail(emailInputHtml);
     validatePhoneNumber(phoneNumberInputHtml);
     validateAddress();
-
+    
     if (
         validateName(firstNameInputHtml) &&
         validateName(lastNameInputHtml) &&
@@ -270,7 +286,7 @@ const confirmBill = () => {
         );
         const ward = wards.find((ward) => ward.code === +addressWardHtml.value);
         const date = new Date();
-
+        
         const bill = {
             id: createID(),
             fullName: `${firstNameInputHtml.value} ${lastNameInputHtml.value}`,
@@ -289,6 +305,3 @@ const confirmBill = () => {
     }
 };
 
-confirmBtnHtml.onclick = () => {
-    confirmBill()
-}
