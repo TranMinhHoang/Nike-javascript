@@ -7,10 +7,12 @@ const listCart = getLocalStorage(keyLocalStorageItemCart);
 const countCartHtml = document.querySelector(".navbar-item-notice");
 
 // bai 6
-const navbarCartHtml = document.querySelector("#cart");
-const navbarHomeHtml = document.querySelector("#home");
+const navbarCartHtml = document.getElementById("cart");
+const navbarHomeHtml = document.getElementById("home");
+const navbarBillHtml = document.getElementById('bill')
 const homePageHtml = document.querySelector(".home-page");
 const cartPageHtml = document.querySelector(".cart-page");
+const billPageHtml = document.querySelector(".bill-page");
 const existingCartHtml = document.querySelector(".existing-cart");
 const emptyCartHtml = document.querySelector(".empty-cart");
 const buyCartHtml = document.querySelector(".total-price-cart");
@@ -83,10 +85,12 @@ const detailCart = () => {
 };
 
 const goToCartPage = () => {
-    homePageHtml.classList.add("hidden");
-    navbarHomeHtml.classList.remove("active");
-    cartPageHtml.classList.remove("hidden");
     navbarCartHtml.classList.add("active");
+    navbarHomeHtml.classList.remove("active");
+    navbarBillHtml.classList.remove("active");
+    homePageHtml.classList.add("hidden");
+    billPageHtml.classList.add("hidden");
+    cartPageHtml.classList.remove("hidden");
 
     if (listCart.length > 0) {
         emptyCartHtml.classList.add("hidden");

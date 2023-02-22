@@ -15,10 +15,13 @@ const listProductHtml = document.querySelector(".product-list");
 const goToHomeHtml = document.querySelectorAll('.scr-go-home')
 
 // bai 6
-const navbarCartHtml = document.querySelector("#cart");
-const navbarHomeHtml = document.querySelector("#home");
+const navbarCartHtml = document.getElementById("cart");
+const navbarHomeHtml = document.getElementById("home");
+const navbarBillHtml = document.getElementById("bill");
+
 const homePageHtml = document.querySelector(".home-page");
 const cartPageHtml = document.querySelector(".cart-page");
+const BillPageHtml = document.querySelector(".bill-page");
 
 const getListData = () => {
     const listData = getLocalStorage(keyLocalStorageListSP);
@@ -47,10 +50,13 @@ const getListData = () => {
 getListData();
 
 const goToHomePage = () => {
+    navbarCartHtml.classList.remove("active");
+    navbarBillHtml.classList.remove("active");
+    navbarHomeHtml.classList.add("active");
+
     homePageHtml.classList.remove("hidden");
     cartPageHtml.classList.add("hidden");
-    navbarHomeHtml.classList.add("active");
-    navbarCartHtml.classList.remove("active");
+    BillPageHtml.classList.add("hidden");
     getListData();
 };
 

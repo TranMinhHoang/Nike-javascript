@@ -224,6 +224,8 @@ html {
 .cart-list {
     list-style: none;
     width: 100%;
+    max-height: 550px;
+    overflow-y: auto;
 }
 
 .cart-item {
@@ -334,6 +336,149 @@ html {
     cursor: pointer;
 }
 
+/* bill page */
+.bill-page {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.bill-head {
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.bill-head-list {
+    width: 100%;
+    height: 100%;
+    padding-right: 20px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.bill-head-item {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.bill-head-item:first-child {
+    width: 100px;
+}
+
+.bill-head-item:nth-child(2) {
+    width: 250px;
+}
+
+.bill-head-item:nth-child(3) {
+    width: 150px;
+}
+
+.bill-head-item:nth-child(4) {
+    width: 180px;
+}
+
+.bill-head-item:nth-child(5) {
+    width: 180px;
+}
+
+.bill-head-item:nth-child(6) {
+    width: 180px;
+}
+
+.bill-head-item:last-child {
+    width: 60px;
+}
+
+.bill-body {
+    width: 100%;
+}
+
+.bill-body-list {
+    width: 100%;
+    max-height: 550px;
+    overflow-y: auto;
+    list-style: none;
+}
+
+.bill-body-item {
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #ccc;
+}
+
+.bill-info-list {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bill-info-item {
+    height: 100%;
+    padding-top: 16px ;
+    font-size: 1.6rem;
+}
+
+.bill-info-item:first-child {
+    width: 100px;
+    padding-right: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bill-info-item:nth-child(2) {
+    width: 250px;
+}
+
+.bill-info-item:nth-child(3) {
+    width: 150px;
+}
+
+.bill-info-item:nth-child(4) {
+    width: 180px;
+}
+
+.bill-info-item:nth-child(5) {
+    width: 180px;
+}
+
+.bill-info-item:nth-child(6) {
+    width: 180px;
+}
+
+.bill-info-item:last-child {
+    width: 60px;
+    padding-left: 10px;
+}
+
+.bill-detail-code {
+    text-align: unset;
+    margin-top: 4px;
+    font-size: 1.6rem;
+    color: #2E6FF6;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+}
+
+.bill-remove-icon {
+    font-size: 2rem;
+    color: red;
+    cursor: pointer;
+}
+
+
+.bill-footer {
+    margin-top: 30px;
+}
+
+
 /* modal */
 .modal-auth {
     position: fixed;
@@ -344,13 +489,14 @@ html {
     display: flex;
 }
 
-.modal-warning {
+.modal-notify {
     position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     display: flex;
+    z-index: 1;
 }
 
 .modal-overlay {
@@ -368,7 +514,7 @@ html {
     border-radius: 6px;
 }
 
-.modal-body.modal-body-warning {
+.modal-body.modal-body-notify {
     margin: auto;
     width: 500px;
     background-color: #fff;
@@ -503,8 +649,8 @@ html {
     background-color: #2E6FF6;
 }
 
-/* warning form */
-.warning-form-header {
+/* notify form */
+.notify-form-header {
     height: 60px;
     padding: 0 10px;
     display: flex;
@@ -513,18 +659,18 @@ html {
     border-bottom: 1px solid #ccc;
 }
 
-.warning-header-icon {
+.notify-header-icon {
     font-size: 2rem;
     padding-right: 4px;
     color: orangered;
 }
 
-.warning-form-heading {
+.notify-form-heading {
     flex: auto;
     font-size: 2rem;
 }
 
-.warning-form-body {
+.notify-form-body {
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -533,24 +679,24 @@ html {
     border-bottom: 1px solid #ccc;
 }
 
-.warning-body-icon {
+.notify-body-icon {
     font-size: 6rem;
     color: orangered;
     padding-bottom: 10px;
 }
 
-.warning-form-text {
+.notify-form-text {
     font-size: 1.6rem;
 }
 
-.warning-form-footer {
+.notify-form-footer {
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.warning-form-confirm {
+.notify-form-confirm {
     width: 80px;
     height: 30px;
     font-size: 1.6rem;
