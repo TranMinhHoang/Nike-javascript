@@ -1,3 +1,5 @@
+import { getParentElement } from "./common.js"
+
 const navbarBillHtml = document.getElementById('bill')
 const navbarHomeHtml = document.getElementById('home')
 const navbarCartHtml = document.getElementById('cart')
@@ -69,26 +71,51 @@ const goToBillPage = async () => {
     const listBill = await getListBill()
     const bill = listBill.map(bill => (
         `<li class="bill-body-item">
-        <ul class="bill-info-list">
-            <li class="bill-info-item">
+        <div class="bill-info-list">
+            <div class="bill-info-item">
                 ${bill.id}
-                <button class="bill-detail-code">
+                <button class="bill-detail-btn">
                     Detail
                     <i class="fa-solid fa-caret-down"></i>
                 </button>
-            </li>
-            <li class="bill-info-item">${bill.fullName}</li>
-            <li class="bill-info-item">${bill.date}</li>
-            <li class="bill-info-item">${bill.cart.detailCart.map(item => item.id).join(', ')}</li>
-            <li class="bill-info-item">${bill.cart.detailCart.reduce((prev, curr) => prev + curr.buyCount, 0) }</li>
-            <li class="bill-info-item">$ ${bill.cart.total}</li>
-            <li class="bill-info-item">
+            </div>
+            <div class="bill-info-item">${bill.fullName}</div>
+            <div class="bill-info-item">${bill.date}</div>
+            <div class="bill-info-item">${bill.cart.detailCart.length}</div>
+            <div class="bill-info-item">${bill.cart.detailCart.reduce((prev, curr) => prev + curr.buyCount, 0) }</div>
+            <div class="bill-info-item">$ ${bill.cart.total}</div>
+            <div class="bill-info-item">
                 <i class="fa-regular fa-rectangle-xmark bill-remove-icon"></i>
-            </li>
-        </ul>
+            </div>
+        </div>
+        <div class="detail-bill hidden">
+            <ul class="detail-bill-list">
+                ${bill.cart.detailCart.map(item => (
+                    `<li class="detail-bill-item">
+                    <img src="${item.image}" alt="" class="detail-bill-img">
+                    <div class="detail-bill-info">
+                        <h2 class="detail-bill-name">${item.name}</h2>
+                        <div class="detail-bill-price-wrap">
+                            <span class="detail-bill-price">$${item.subPrice}</span>
+                            <span class="detail-bill-multify">x</span>
+                            <span class="detail-bill-count">${item.buyCount}</span>
+                        </div >
+                    </div >
+                </li>`
+                )).join(' ')}
+            </ul >
+        </div>
     </li >`
     ))
     listBillHtml.innerHTML = bill.join(' ')
+    const detailBillBtnHtml = document.querySelectorAll('.bill-detail-btn')
+    detailBillBtnHtml.forEach(element => {
+        element.onclick = () => {
+            const detailBillHtml = getParentElement(element, '.bill-body-item').querySelector('.detail-bill')
+            detailBillHtml.classList.toggle('hidden')
+            
+        }
+    })  
 }
 
 navbarBillHtml.onclick = () => {

@@ -406,7 +406,7 @@ html {
 
 .bill-body-item {
     width: 100%;
-    height: 80px;
+    padding-bottom: 8px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -414,14 +414,13 @@ html {
     width: 100%;
     height: 100%;
     padding: 0 20px;
-    list-style: none;
     display: flex;
     justify-content: space-between;
 }
 
 .bill-info-item {
     height: 100%;
-    padding-top: 16px ;
+    padding: 16px 0;
     font-size: 1.6rem;
 }
 
@@ -457,7 +456,7 @@ html {
     padding-left: 10px;
 }
 
-.bill-detail-code {
+.bill-detail-btn {
     text-align: unset;
     margin-top: 4px;
     font-size: 1.6rem;
@@ -472,6 +471,62 @@ html {
     color: red;
     cursor: pointer;
 }
+
+.detail-bill {
+    width: 30%;
+    padding: 0 20px;
+}
+
+.detail-bill-list {
+    list-style: none;
+    width: 100%;
+    
+}
+
+.detail-bill-item {
+    padding-bottom: 8px;
+    width: 100%;
+    display: flex;
+}
+
+
+.detail-bill-img {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border: 1px solid #f2f1f1;
+}
+
+.detail-bill-info {
+    padding-left: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.detail-bill-name {
+    font-size: 1.6rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+} 
+
+.detail-bill-price {
+    font-size: 1.6rem;
+    color: red;
+}
+
+.detail-bill-multify {
+    
+}
+
+.detail-bill-count {
+    font-size: 1.2rem;
+}
+
 
 
 .bill-footer {
