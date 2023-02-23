@@ -1,4 +1,3 @@
-// Bai 1
 const listData = [
     {
         id: 0,
@@ -54,7 +53,6 @@ const listData = [
 const keyLocalStorageListSP = "DANHSACHSP";
 const keyLocalStorageItemCart = "DANHSACHIMTEMCART";
 
-// bai 12 
 const setLocalStorage = (key, data) => {
     localStorage.setItem(key, JSON.stringify(data));
 };

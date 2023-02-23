@@ -9,7 +9,6 @@ const cartPageHtml = document.querySelector('.cart-page')
 const footerHtml = document.querySelector('.footer')
 const listBillHtml = document.querySelector('.bill-body-list')
 
-// bai 14
 const getListBill = () => {
     return fetch("http://localhost:3000/bills")
         .then((res) => res.json())
@@ -60,7 +59,6 @@ const deleteBill = (id) => {
     }).then((response) => response.json());
 };
 
-// bai 16
 const goToBillPage = async () => {
     navbarBillHtml.classList.add('active')
     navbarHomeHtml.classList.remove('active')

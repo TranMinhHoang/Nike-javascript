@@ -6,23 +6,18 @@ import {
 } from "./common.js";
 import { addSP } from "./cart.js";
 
-// Bai 2
-setLocalStorage(keyLocalStorageListSP, listData);
 
-// Bai 3
 const listProductHtml = document.querySelector(".product-list");
-
 const goToHomeHtml = document.querySelectorAll('.scr-go-home')
-
-// bai 6
 const navbarCartHtml = document.getElementById("cart");
 const navbarHomeHtml = document.getElementById("home");
 const navbarBillHtml = document.getElementById("bill");
-
 const homePageHtml = document.querySelector(".home-page");
 const cartPageHtml = document.querySelector(".cart-page");
 const BillPageHtml = document.querySelector(".bill-page");
 const footerHtml = document.querySelector(".footer")
+
+setLocalStorage(keyLocalStorageListSP, listData);
 
 const getListData = () => {
     const listData = getLocalStorage(keyLocalStorageListSP);

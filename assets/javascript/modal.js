@@ -11,19 +11,22 @@ import {
 } from "./cart.js";
 import { postBill } from "./bill.js";
 
-// Bai 7
+const regex = {
+    email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+    number: /^[0-9]+$/,
+};
+
+let provinces = [];
+let districts = [];
+let wards = [];
+
 const modalAuthHtml = document.querySelector(".modal-auth");
 const modalWarningHtml = document.querySelector(".modal-warning");
 const buyBtnHtml = document.querySelector(".buy-btn");
 const closeModalAuthHtml = document.querySelectorAll(".scr-close-modal");
-
-// bai 9
 const listDistrictHtml = document.querySelector("#district");
 const listWardHtml = document.querySelector("#ward");
-
-// bai 11
 const nameInputHtml = document.querySelectorAll(".name-input");
-
 const firstNameInputHtml = document.getElementById("firstname");
 const lastNameInputHtml = document.getElementById("lastname");
 const emailInputHtml = document.getElementById("email");
@@ -33,7 +36,6 @@ const addressDistrictHtml = document.getElementById("district");
 const addressWardHtml = document.getElementById("ward");
 const addressInputHtml = document.getElementById("numberaddress");
 const noteInputHtml = document.getElementById("notemessage");
-
 const confirmBtnHtml = document.querySelector(".auth-form-confirm");
 
 const openModalAuth = () => {
@@ -63,8 +65,6 @@ closeModalAuthHtml.forEach((element) => {
     };
 });
 
-// bai 8
-let provinces = [];
 const getListProvince = (() => {
     const listProvince = document.querySelector("#province");
 
@@ -98,9 +98,6 @@ const getListWard = () => {
         .catch((err) => console.log(err));
 };
 
-// Bai 9
-let districts = [];
-
 const getDistrictByProvinceID = async () => {
     const idProvince = document.getElementById("province").value;
     const listDistrict = await getListDistrict();
@@ -117,8 +114,6 @@ const getDistrictByProvinceID = async () => {
         districtHtml.join(" ");
 };
 
-let wards = [];
-
 const getWardsByDistrictID = async () => {
     const idDistrict = document.getElementById("district").value;
     const listWard = await getListWard();
@@ -134,17 +129,10 @@ const getWardsByDistrictID = async () => {
         '<option value="">--Chọn Phường/Xã--</option>' + wardHtml.join(" ");
 };
 
-// bai 10
 const createID = () => {
     const date = new Date();
     const ID = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getTime()}`;
     return ID;
-};
-
-// bai 11
-const regex = {
-    email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-    number: /^[0-9]+$/,
 };
 
 const validator = (() => {

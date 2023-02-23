@@ -1,12 +1,7 @@
 import { listData, getLocalStorage, setLocalStorage, keyLocalStorageItemCart, getParentElement } from "./common.js";
-// import { goToCartPage } from "./menu.js";
-// Bai 4
+
 const listCart = getLocalStorage(keyLocalStorageItemCart);
-
-// bai 5
 const countCartHtml = document.querySelector(".navbar-item-notice");
-
-// bai 6
 const navbarCartHtml = document.getElementById("cart");
 const navbarHomeHtml = document.getElementById("home");
 const navbarBillHtml = document.getElementById('bill')
@@ -19,13 +14,14 @@ const emptyCartHtml = document.querySelector(".empty-cart");
 const buyCartHtml = document.querySelector(".total-price-cart");
 const listCartHtml = document.querySelector(".cart-list");
 const totalPriceHtml = document.querySelector(".total-price-cart-text");
-
 const modalWarningHtml = document.querySelector(".modal-warning")
 
 const cart = {
     idSP: null,
     soLuong: 0,
 };
+
+const priceCart = new Map();
 
 const addSP = (id) => {
     const newCart = { ...cart };
@@ -40,9 +36,6 @@ const addSP = (id) => {
     setLocalStorage(keyLocalStorageItemCart, listCart);
     handlePriceCart();
 };
-
-// Bai 5
-const priceCart = new Map();
 
 const countCart = () => {
     if (listCart.length === 0) {
@@ -66,7 +59,6 @@ const handlePriceCart = () => {
 };
 handlePriceCart();
 
-// Bai 6
 const detailCart = () => {
     const detailListCart = []
     listCart.map(cart => {
