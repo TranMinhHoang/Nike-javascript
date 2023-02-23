@@ -6,6 +6,7 @@ const navbarCartHtml = document.getElementById('cart')
 const billPageHtml = document.querySelector('.bill-page')
 const homePageHtml = document.querySelector('.home-page')
 const cartPageHtml = document.querySelector('.cart-page')
+const footerHtml = document.querySelector('.footer')
 const listBillHtml = document.querySelector('.bill-body-list')
 
 // bai 14
@@ -54,7 +55,7 @@ const updateBill = () => {
 };
 
 const deleteBill = (id) => {
-    fetch(`http://localhost:3000/bills/${id}`, {
+    fetch(new Request(`http://localhost:3000/bills/${id}`, {redirect: 'error'}), {
         method: "DELETE",
     }).then((response) => response.json());
 };
@@ -67,7 +68,8 @@ const goToBillPage = async () => {
     homePageHtml.classList.add('hidden')
     cartPageHtml.classList.add('hidden')
     billPageHtml.classList.remove('hidden')
-
+    footerHtml.classList.add('hidden')
+    
     const listBill = await getListBill()
     const bill = listBill.map(bill => (
         `<li class="bill-body-item">
@@ -109,6 +111,7 @@ const goToBillPage = async () => {
     ))
     listBillHtml.innerHTML = bill.join(' ')
     const detailBillBtnHtml = document.querySelectorAll('.bill-detail-btn')
+    const deleteBillBtnHtml = document.querySelectorAll('.bill-remove-icon')
     detailBillBtnHtml.forEach(element => {
         element.onclick = () => {
             const detailBillHtml = getParentElement(element, '.bill-body-item').querySelector('.detail-bill')
@@ -116,6 +119,13 @@ const goToBillPage = async () => {
             
         }
     })  
+    deleteBillBtnHtml.forEach(element => {
+        element.onclick = async (e) => {
+            const idBill = getParentElement(element, 'li').querySelector('.bill-info-item').innerText.split(' ')[0]
+            await deleteBill(idBill)
+            goToBillPage()
+        }
+    })
 }
 
 navbarBillHtml.onclick = () => {

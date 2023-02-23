@@ -13,6 +13,7 @@ const navbarBillHtml = document.getElementById('bill')
 const homePageHtml = document.querySelector(".home-page");
 const cartPageHtml = document.querySelector(".cart-page");
 const billPageHtml = document.querySelector(".bill-page");
+const footerHtml = document.querySelector(".footer")
 const existingCartHtml = document.querySelector(".existing-cart");
 const emptyCartHtml = document.querySelector(".empty-cart");
 const buyCartHtml = document.querySelector(".total-price-cart");
@@ -91,6 +92,7 @@ const goToCartPage = () => {
     homePageHtml.classList.add("hidden");
     billPageHtml.classList.add("hidden");
     cartPageHtml.classList.remove("hidden");
+    footerHtml.classList.add("hidden");
 
     if (listCart.length > 0) {
         emptyCartHtml.classList.add("hidden");

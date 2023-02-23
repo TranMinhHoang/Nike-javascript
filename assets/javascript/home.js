@@ -22,6 +22,7 @@ const navbarBillHtml = document.getElementById("bill");
 const homePageHtml = document.querySelector(".home-page");
 const cartPageHtml = document.querySelector(".cart-page");
 const BillPageHtml = document.querySelector(".bill-page");
+const footerHtml = document.querySelector(".footer")
 
 const getListData = () => {
     const listData = getLocalStorage(keyLocalStorageListSP);
@@ -57,6 +58,7 @@ const goToHomePage = () => {
     homePageHtml.classList.remove("hidden");
     cartPageHtml.classList.add("hidden");
     BillPageHtml.classList.add("hidden");
+    footerHtml.classList.remove("hidden");
     getListData();
 };
 
