@@ -1,3 +1,45 @@
 {
-  "bills": []
+  "bills": [
+    {
+      "id": "20231231677142714645",
+      "fullName": "Trần Minh Hoàng",
+      "email": "hoang@gmail.com",
+      "phoneNumber": "0687461354",
+      "address": "Số 568 Nguyễn Văn Cừ, Phường Gia Thụy, Quận Long Biên, Thành phố Hà Nội",
+      "date": "23/02/2023",
+      "note": "",
+      "cart": {
+        "detailCart": [
+          {
+            "id": 3,
+            "name": "Nike Streakfly Road Racing Shoes",
+            "image": "./assets/images/home/NikeStreakflyRoadRacingShoes.png",
+            "quantity": 15,
+            "buyCount": 1,
+            "subPrice": 300,
+            "totalPrice": 300
+          },
+          {
+            "id": 5,
+            "name": "Nike Dunk",
+            "image": "./assets/images/home/NikeDunk.png",
+            "quantity": 4,
+            "buyCount": 1,
+            "subPrice": 100,
+            "totalPrice": 100
+          },
+          {
+            "id": 2,
+            "name": "Nike Air Force 1",
+            "image": "./assets/images/home/NikeAirForce1.jfif",
+            "quantity": 20,
+            "buyCount": 1,
+            "subPrice": 400,
+            "totalPrice": 400
+          }
+        ],
+        "total": 800
+      }
+    }
+  ]
 }
