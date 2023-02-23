@@ -44,8 +44,8 @@ const postBill = (data) => {
         });
 };
 
-const updateBill = () => {
-    fetch(`http://localhost:3000/bills/${id}`, {
+const updateBill = (data) => {
+    fetch(`http://localhost:3000/bills/${data.id}`, {
         method: "PUT",
         body: JSON.stringify({ data }),
     })
