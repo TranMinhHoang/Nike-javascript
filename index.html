@@ -147,7 +147,7 @@
 
                 <div class="bill-body">
                     <ul class="bill-body-list">
-                        <li class="bill-body-item">
+                        <!-- <li class="bill-body-item">
                             <div class="bill-info-list">
                                 <div class="bill-info-item">
                                     ads213
@@ -180,7 +180,7 @@
                                     </li>
                                 </ul >
                             </div>
-                        </li >
+                        </li > -->
                     </ul >
                 </div>
 
@@ -281,7 +281,7 @@
         </div>
     </div>
 
-    <div class="modal-auth hidden ">
+    <div class=" modal-auth hidden ">
         <div class="modal-overlay scr-close-modal">
         </div>
         <div class="modal-body">
@@ -359,13 +359,13 @@
 
                 <div class="auth-form-footer">
                     <button class="auth-form-close auth-form-btn scr-close-modal">Hủy</button>
-                    <button onclick="handleBuy()" class="auth-form-confirm auth-form-btn">Xác nhận</button>
+                    <button class="auth-form-confirm auth-form-btn">Xác nhận</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal-notify modal-warning hidden">
+    <div class=" modal-notify modal-warning hidden">
         <div class="modal-overlay scr-close-modal">
         </div>
         <div class="modal-body modal-body-notify">
@@ -388,7 +388,7 @@
         </div>
     </div>
 
-    <!-- <div class="modal-notify modal-success hidden">
+    <div class=" modal-notify modal-success hidden">
         <div class="modal-overlay scr-close-modal">
         </div>
         <div class="modal-body modal-body-notify">
@@ -409,7 +409,31 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
+
+    <div class=" modal-notify modal-delete hidden">
+        <div class="modal-overlay scr-close-modal">
+        </div>
+        <div class="modal-body modal-body-notify">
+            <div class="modal-form">
+                <div class="notify-form-header">
+                    <i class="notify-header-icon fa-solid fa-circle-exclamation"></i>
+                    <h2 class="notify-form-heading">Thông báo</h2>
+                    <i class="close-icon scr-close-modal fa-solid fa-xmark"></i>
+                </div>
+
+                <div class="notify-form-body">
+                    <i class="notify-body-icon fa-solid fa-rotate-left"></i>
+                    <p class="notify-form-text">Trả lại đơn hàng!</p>
+                </div>
+
+                <div class="notify-form-footer">
+                    <button class="notify-form-close scr-close-modal">Hủy</button>
+                    <button class="notify-form-confirm return-bill-btn">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script type="module" src="./assets/javascript/common.js"></script>
     <script type="module" src="./assets/javascript/cart.js"></script>

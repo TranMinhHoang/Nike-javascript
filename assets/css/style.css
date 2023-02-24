@@ -886,13 +886,27 @@ html {
     align-items: center;
 }
 
+.notify-form-close {
+    width: 60px;
+    height: 40px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.6rem;
+    background-color: #CB444A;
+    margin-right: 16px;
+}
+
 .notify-form-confirm {
     width: 80px;
-    height: 30px;
+    height: 40px;
     font-size: 1.6rem;
     color: #fff;
     background-color: #2E6FF6;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
 }
 

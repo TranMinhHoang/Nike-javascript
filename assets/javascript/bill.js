@@ -1,4 +1,6 @@
-import { getParentElement } from "./common.js"
+import { getParentElement, setLocalStorage, keyLocalStorageItemCart } from "./common.js"
+import { handlePriceCart, goToCartPage, listCart } from "./cart.js"
+import { openModalSuccess, openModalDelete, closeModalDelete } from "./modal.js"
 
 const navbarBillHtml = document.getElementById('bill')
 const navbarHomeHtml = document.getElementById('home')
@@ -8,16 +10,19 @@ const homePageHtml = document.querySelector('.home-page')
 const cartPageHtml = document.querySelector('.cart-page')
 const footerHtml = document.querySelector('.footer')
 const listBillHtml = document.querySelector('.bill-body-list')
+const confirmBtnHtml = document.querySelector(".auth-form-confirm");
+const modalDeleteHtml = document.querySelector(".modal-delete")
+const returnBillBtnHtml = document.querySelector(".return-cart-btn")
 
 const getListBill = () => {
-    return fetch("http://localhost:3000/bills")
+    return fetch("https://63f81a221dc21d5465b9898b.mockapi.io/api/bill")
         .then((res) => res.json())
         .then((data) => data)
         .catch((err) => console.log(err));
 };
 
 const getBillByID = (id) => {
-    fetch(`http://localhost:3000/bills/${id}`)
+    fetch(`https://63f81a221dc21d5465b9898b.mockapi.io/api/bill/${id}`)
         .then((res) => res.json())
         .then((data) => console.log(data))
         .catch((err) => console.log(err));
@@ -25,7 +30,7 @@ const getBillByID = (id) => {
 
 const postBill = (data) => {
     
-    fetch("http://localhost:3000/bills", {
+    fetch("https://63f81a221dc21d5465b9898b.mockapi.io/api/bill", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -35,8 +40,13 @@ const postBill = (data) => {
         .then((response) => {
                 return response.json()
         })
-        .then((data) => {
-            console.log("Success:", data);
+        .then(() => {
+            confirmBtnHtml.removeAttribute('disabled');
+            openModalSuccess()
+            listCart.splice(0, listCart.length)
+            setLocalStorage(keyLocalStorageItemCart, listCart);
+            handlePriceCart();
+            goToCartPage();
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -44,7 +54,7 @@ const postBill = (data) => {
 };
 
 const updateBill = (data) => {
-    fetch(`http://localhost:3000/bills/${data.id}`, {
+    fetch(`https://63f81a221dc21d5465b9898b.mockapi.io/api/bill/${data.id}`, {
         method: "PUT",
         body: JSON.stringify({ data }),
     })
@@ -54,9 +64,14 @@ const updateBill = (data) => {
 };
 
 const deleteBill = (id) => {
-    fetch(new Request(`http://localhost:3000/bills/${id}`, {redirect: 'error'}), {
+    fetch(`https://63f81a221dc21d5465b9898b.mockapi.io/api/bill/${id}`, {
         method: "DELETE",
-    }).then((response) => response.json());
+    })
+        .then((response) => response.json())
+        .then(() => {
+            closeModalDelete()
+            goToBillPage()
+        })
 };
 
 const goToBillPage = async () => {
@@ -70,7 +85,7 @@ const goToBillPage = async () => {
     
     const listBill = await getListBill()
     const bill = listBill.map(bill => (
-        `<li class="bill-body-item">
+        `<li class="bill-body-item" value="${bill.idSystem}">
         <div class="bill-info-list">
             <div class="bill-info-item">
                 ${bill.id}
@@ -118,10 +133,10 @@ const goToBillPage = async () => {
         }
     })  
     deleteBillBtnHtml.forEach(element => {
-        element.onclick = async (e) => {
-            const idBill = getParentElement(element, 'li').querySelector('.bill-info-item').innerText.split(' ')[0]
-            await deleteBill(idBill)
-            goToBillPage()
+        element.onclick = () => {
+            // const idBill = getParentElement(element, 'li').querySelector('.bill-info-item').innerText.split(' ')[0]
+            const idBill = getParentElement(element, 'li').value
+            openModalDelete(idBill)
         }
     })
 }
@@ -132,4 +147,4 @@ navbarBillHtml.onclick = () => {
 
 
 
-export {postBill}
+export {postBill, deleteBill ,goToBillPage}

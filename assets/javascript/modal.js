@@ -9,7 +9,7 @@ import {
     handlePriceCart,
     goToCartPage,
 } from "./cart.js";
-import { postBill } from "./bill.js";
+import { postBill, deleteBill ,goToBillPage } from "./bill.js";
 
 const regex = {
     email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
@@ -22,8 +22,10 @@ let wards = [];
 
 const modalAuthHtml = document.querySelector(".modal-auth");
 const modalWarningHtml = document.querySelector(".modal-warning");
+const modalSuccessHtml = document.querySelector(".modal-success");
+const modalDeleteHtml = document.querySelector(".modal-delete");
 const buyBtnHtml = document.querySelector(".buy-btn");
-const closeModalAuthHtml = document.querySelectorAll(".scr-close-modal");
+const closeAllModalHtml = document.querySelectorAll(".scr-close-modal");
 const listDistrictHtml = document.querySelector("#district");
 const listWardHtml = document.querySelector("#ward");
 const nameInputHtml = document.querySelectorAll(".name-input");
@@ -37,6 +39,9 @@ const addressWardHtml = document.getElementById("ward");
 const addressInputHtml = document.getElementById("numberaddress");
 const noteInputHtml = document.getElementById("notemessage");
 const confirmBtnHtml = document.querySelector(".auth-form-confirm");
+const goToBillBtnHtml = document.querySelector(".scr-bill")
+const returnBillBtnHtml = document.querySelector(".return-bill-btn")
+
 
 const openModalAuth = () => {
     modalAuthHtml.classList.remove("hidden");
@@ -54,16 +59,46 @@ const closeModalWarning = () => {
     modalWarningHtml.classList.add("hidden");
 };
 
+const openModalSuccess = () => {
+    modalSuccessHtml.classList.remove("hidden");
+};
+
+const closeModalSuccess = () => {
+    modalSuccessHtml.classList.add("hidden");
+};
+
+const openModalDelete = (id) => {
+    modalDeleteHtml.classList.remove("hidden");
+    returnBillBtnHtml.onclick = () => {
+        deleteBill(id)
+    }
+};
+
+const closeModalDelete = () => {
+    modalDeleteHtml.classList.add("hidden");
+};
+
 buyBtnHtml.onclick = () => {
     openModalAuth();
 };
 
-closeModalAuthHtml.forEach((element) => {
+goToBillBtnHtml.onclick = () => {
+    closeAllModal()
+    goToBillPage()
+}
+
+closeAllModalHtml.forEach((element) => {
     element.onclick = () => {
-        closeModalAuth();
-        closeModalWarning();
+        closeAllModal()
     };
 });
+
+const closeAllModal = () => {
+    closeModalAuth();
+    closeModalWarning();
+    closeModalSuccess()
+    closeModalDelete()
+}
 
 const getListProvince = (() => {
     const listProvince = document.querySelector("#province");
@@ -299,13 +334,13 @@ const infoBill = () => {
     }
 };
 
-const createBill = async () => {
+const createBill = () => {
     const bill = infoBill();
-    const newCart = [];
     if (bill) {
-        await postBill(bill);
-        setLocalStorage(keyLocalStorageItemCart, newCart);
-        handlePriceCart();
-        goToCartPage();
+        postBill(bill);
+        confirmBtnHtml.setAttribute("disabled", "");
     }
 };
+
+
+export {openModalSuccess, openModalDelete, closeModalDelete}
