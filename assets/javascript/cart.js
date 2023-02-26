@@ -173,7 +173,7 @@ const plusItem = (id) => {
 const minusItem = (id) => {
     const item = listCart.find((cart) => cart.idSP === id);
     if (item.soLuong === 0) {
-        removeItem(item.id);
+        removeItem(id);
     } else {
         item.soLuong = item.soLuong - 1;
         setLocalStorage(keyLocalStorageItemCart, listCart);
