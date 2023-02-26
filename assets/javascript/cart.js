@@ -1,4 +1,5 @@
 import { listData, getLocalStorage, setLocalStorage, keyLocalStorageItemCart, getParentElement } from "./common.js";
+import { openModalWarning, openModalDeleteProduct } from "./modal.js";
 
 const listCart = getLocalStorage(keyLocalStorageItemCart);
 const countCartHtml = document.querySelector(".navbar-item-notice");
@@ -14,7 +15,6 @@ const emptyCartHtml = document.querySelector(".empty-cart");
 const buyCartHtml = document.querySelector(".total-price-cart");
 const listCartHtml = document.querySelector(".cart-list");
 const totalPriceHtml = document.querySelector(".total-price-cart-text");
-const modalWarningHtml = document.querySelector(".modal-warning")
 
 const cart = {
     idSP: null,
@@ -166,7 +166,7 @@ const plusItem = (id) => {
         handlePriceCart();
         goToCartPage();
     } else {
-        modalWarningHtml.classList.remove('hidden')
+        openModalWarning()
     }
 };
 
@@ -183,11 +183,7 @@ const minusItem = (id) => {
 };
 
 const removeItem = (id) => {
-    const indexItem = listCart.findIndex((cart) => cart.idSP === id);
-    listCart.splice(indexItem, 1);
-    setLocalStorage(keyLocalStorageItemCart, listCart);
-    handlePriceCart();
-    goToCartPage();
+    openModalDeleteProduct(id)
 };
 
 export { addSP, priceCart, detailCart, handlePriceCart, goToCartPage, listCart }

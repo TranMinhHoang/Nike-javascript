@@ -8,6 +8,7 @@ import {
     detailCart,
     handlePriceCart,
     goToCartPage,
+    listCart
 } from "./cart.js";
 import { postBill, deleteBill ,goToBillPage } from "./bill.js";
 
@@ -23,7 +24,8 @@ let wards = [];
 const modalAuthHtml = document.querySelector(".modal-auth");
 const modalWarningHtml = document.querySelector(".modal-warning");
 const modalSuccessHtml = document.querySelector(".modal-success");
-const modalDeleteHtml = document.querySelector(".modal-delete");
+const modalDeleteBillHtml = document.querySelector(".modal-delete-bill");
+const modalDeleteProductHtml = document.querySelector(".modal-delete-product");
 const buyBtnHtml = document.querySelector(".buy-btn");
 const closeAllModalHtml = document.querySelectorAll(".scr-close-modal");
 const listDistrictHtml = document.querySelector("#district");
@@ -41,6 +43,7 @@ const noteInputHtml = document.getElementById("notemessage");
 const confirmBtnHtml = document.querySelector(".auth-form-confirm");
 const goToBillBtnHtml = document.querySelector(".scr-bill")
 const returnBillBtnHtml = document.querySelector(".return-bill-btn")
+const deleteProductBtnHtml = document.querySelector(".delete-product-btn")
 
 
 const openModalAuth = () => {
@@ -67,15 +70,32 @@ const closeModalSuccess = () => {
     modalSuccessHtml.classList.add("hidden");
 };
 
-const openModalDelete = (id) => {
-    modalDeleteHtml.classList.remove("hidden");
+const openModalDeleteBill = (id) => {
+    modalDeleteBillHtml.classList.remove("hidden");
     returnBillBtnHtml.onclick = () => {
         deleteBill(id)
     }
 };
 
-const closeModalDelete = () => {
-    modalDeleteHtml.classList.add("hidden");
+const closeModalDeleteBill = () => {
+    modalDeleteBillHtml.classList.add("hidden");
+};
+
+const closeModalDeleteProduct = () => {
+    modalDeleteProductHtml.classList.add("hidden");
+};
+
+const openModalDeleteProduct = (id) => {
+    modalDeleteProductHtml.classList.remove("hidden");
+    deleteProductBtnHtml.onclick = () => {
+        const indexItem = listCart.findIndex((cart) => cart.idSP === id);
+        listCart.splice(indexItem, 1);
+        setLocalStorage(keyLocalStorageItemCart, listCart);
+        handlePriceCart();
+        goToCartPage();
+        closeModalDeleteProduct()
+    }
+
 };
 
 buyBtnHtml.onclick = () => {
@@ -97,7 +117,8 @@ const closeAllModal = () => {
     closeModalAuth();
     closeModalWarning();
     closeModalSuccess()
-    closeModalDelete()
+    closeModalDeleteBill()
+    closeModalDeleteProduct()
 }
 
 const getListProvince = (() => {
@@ -343,4 +364,4 @@ const createBill = () => {
 };
 
 
-export {openModalSuccess, openModalDelete, closeModalDelete}
+export {openModalSuccess, openModalDeleteBill,closeModalDeleteBill, openModalWarning, openModalDeleteProduct}

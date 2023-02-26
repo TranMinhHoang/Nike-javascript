@@ -1,6 +1,6 @@
 import { getParentElement, setLocalStorage, keyLocalStorageItemCart } from "./common.js"
 import { handlePriceCart, goToCartPage, listCart } from "./cart.js"
-import { openModalSuccess, openModalDelete, closeModalDelete } from "./modal.js"
+import { openModalSuccess, openModalDeleteBill,closeModalDeleteBill } from "./modal.js"
 
 const navbarBillHtml = document.getElementById('bill')
 const navbarHomeHtml = document.getElementById('home')
@@ -11,8 +11,6 @@ const cartPageHtml = document.querySelector('.cart-page')
 const footerHtml = document.querySelector('.footer')
 const listBillHtml = document.querySelector('.bill-body-list')
 const confirmBtnHtml = document.querySelector(".auth-form-confirm");
-const modalDeleteHtml = document.querySelector(".modal-delete")
-const returnBillBtnHtml = document.querySelector(".return-cart-btn")
 
 const getListBill = () => {
     return fetch("https://63f81a221dc21d5465b9898b.mockapi.io/api/bill")
@@ -69,7 +67,7 @@ const deleteBill = (id) => {
     })
         .then((response) => response.json())
         .then(() => {
-            closeModalDelete()
+            closeModalDeleteBill()
             goToBillPage()
         })
 };
@@ -136,7 +134,7 @@ const goToBillPage = async () => {
         element.onclick = () => {
             // const idBill = getParentElement(element, 'li').querySelector('.bill-info-item').innerText.split(' ')[0]
             const idBill = getParentElement(element, 'li').value
-            openModalDelete(idBill)
+            openModalDeleteBill(idBill)
         }
     })
 }
