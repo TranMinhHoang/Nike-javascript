@@ -1,6 +1,6 @@
-import { getParentElement, setLocalStorage, keyLocalStorageItemCart } from "./common.js"
-import { handlePriceCart, goToCartPage, listCart } from "./cart.js"
-import { openModalSuccess, openModalDeleteBill,closeModalDeleteBill } from "./modal.js"
+import { getListBill } from "./api.js"
+import { getParentElement } from "./common.js"
+import { openModalDeleteBill } from "./modal.js"
 
 const navbarBillHtml = document.getElementById('bill')
 const navbarHomeHtml = document.getElementById('home')
@@ -10,67 +10,6 @@ const homePageHtml = document.querySelector('.home-page')
 const cartPageHtml = document.querySelector('.cart-page')
 const footerHtml = document.querySelector('.footer')
 const listBillHtml = document.querySelector('.bill-body-list')
-const confirmBtnHtml = document.querySelector(".auth-form-confirm");
-
-const getListBill = () => {
-    return fetch("https://63f81a221dc21d5465b9898b.mockapi.io/api/bill")
-        .then((res) => res.json())
-        .then((data) => data)
-        .catch((err) => console.log(err));
-};
-
-const getBillByID = (id) => {
-    fetch(`https://63f81a221dc21d5465b9898b.mockapi.io/api/bill/${id}`)
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err));
-};
-
-const postBill = (data) => {
-    
-    fetch("https://63f81a221dc21d5465b9898b.mockapi.io/api/bill", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    })
-        .then((response) => {
-                return response.json()
-        })
-        .then(() => {
-            confirmBtnHtml.removeAttribute('disabled');
-            openModalSuccess()
-            listCart.splice(0, listCart.length)
-            setLocalStorage(keyLocalStorageItemCart, listCart);
-            handlePriceCart();
-            goToCartPage();
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
-};
-
-const updateBill = (data) => {
-    fetch(`https://63f81a221dc21d5465b9898b.mockapi.io/api/bill/${data.id}`, {
-        method: "PUT",
-        body: JSON.stringify({ data }),
-    })
-        .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err));
-};
-
-const deleteBill = (id) => {
-    fetch(`https://63f81a221dc21d5465b9898b.mockapi.io/api/bill/${id}`, {
-        method: "DELETE",
-    })
-        .then((response) => response.json())
-        .then(() => {
-            closeModalDeleteBill()
-            goToBillPage()
-        })
-};
 
 const goToBillPage = async () => {
     navbarBillHtml.classList.add('active')
@@ -145,4 +84,4 @@ navbarBillHtml.onclick = () => {
 
 
 
-export {postBill, deleteBill ,goToBillPage}
+export {goToBillPage}

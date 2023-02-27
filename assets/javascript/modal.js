@@ -4,18 +4,22 @@ import {
     keyLocalStorageItemCart,
 } from "./common.js";
 import {
+    getListDistrict,
+    getListProvince,
+    getListWard,
+    getListBill,
+    postBill,
+    deleteBill,
+} from "./api.js";
+import { validateAddress, validateEmail, validateName, validatePhoneNumber, validator } from "./validator.js";
+import {
     priceCart,
     detailCart,
     handlePriceCart,
     goToCartPage,
-    listCart
+    listCart,
 } from "./cart.js";
-import { postBill, deleteBill ,goToBillPage } from "./bill.js";
-
-const regex = {
-    email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-    number: /^[0-9]+$/,
-};
+import { goToBillPage } from "./bill.js";
 
 let provinces = [];
 let districts = [];
@@ -28,9 +32,6 @@ const modalDeleteBillHtml = document.querySelector(".modal-delete-bill");
 const modalDeleteProductHtml = document.querySelector(".modal-delete-product");
 const buyBtnHtml = document.querySelector(".buy-btn");
 const closeAllModalHtml = document.querySelectorAll(".scr-close-modal");
-const listDistrictHtml = document.querySelector("#district");
-const listWardHtml = document.querySelector("#ward");
-const nameInputHtml = document.querySelectorAll(".name-input");
 const firstNameInputHtml = document.getElementById("firstname");
 const lastNameInputHtml = document.getElementById("lastname");
 const emailInputHtml = document.getElementById("email");
@@ -41,13 +42,17 @@ const addressWardHtml = document.getElementById("ward");
 const addressInputHtml = document.getElementById("numberaddress");
 const noteInputHtml = document.getElementById("notemessage");
 const confirmBtnHtml = document.querySelector(".auth-form-confirm");
-const goToBillBtnHtml = document.querySelector(".scr-bill")
-const returnBillBtnHtml = document.querySelector(".return-bill-btn")
-const deleteProductBtnHtml = document.querySelector(".delete-product-btn")
+const goToBillBtnHtml = document.querySelector(".scr-bill");
+const returnBillBtnHtml = document.querySelector(".return-bill-btn");
+const deleteProductBtnHtml = document.querySelector(".delete-product-btn");
+const listDistrictHtml = document.querySelector("#district");
+const listWardHtml = document.querySelector("#ward");
 
-
-const openModalAuth = () => {
+const openModalAuth = async () => {
     modalAuthHtml.classList.remove("hidden");
+    validator()
+    provinces = await getListProvince();
+    console.log(provinces)
 };
 
 const closeModalAuth = () => {
@@ -73,8 +78,8 @@ const closeModalSuccess = () => {
 const openModalDeleteBill = (id) => {
     modalDeleteBillHtml.classList.remove("hidden");
     returnBillBtnHtml.onclick = () => {
-        deleteBill(id)
-    }
+        deleteBill(id);
+    };
 };
 
 const closeModalDeleteBill = () => {
@@ -93,9 +98,8 @@ const openModalDeleteProduct = (id) => {
         setLocalStorage(keyLocalStorageItemCart, listCart);
         handlePriceCart();
         goToCartPage();
-        closeModalDeleteProduct()
-    }
-
+        closeModalDeleteProduct();
+    };
 };
 
 buyBtnHtml.onclick = () => {
@@ -103,55 +107,26 @@ buyBtnHtml.onclick = () => {
 };
 
 goToBillBtnHtml.onclick = () => {
-    closeAllModal()
-    goToBillPage()
-}
+    closeAllModal();
+    goToBillPage();
+};
 
 closeAllModalHtml.forEach((element) => {
     element.onclick = () => {
-        closeAllModal()
+        closeAllModal();
     };
 });
 
 const closeAllModal = () => {
     closeModalAuth();
     closeModalWarning();
-    closeModalSuccess()
-    closeModalDeleteBill()
-    closeModalDeleteProduct()
-}
-
-const getListProvince = (() => {
-    const listProvince = document.querySelector("#province");
-
-    fetch("https://provinces.open-api.vn/api/p/")
-        .then((res) => res.json())
-        .then((data) => {
-            provinces = data;
-            const provinceHtml = data.map(
-                (data) => `
-            <option label="${data.name}" value="${data.code}"></option>
-            `
-            );
-            listProvince.innerHTML =
-                '<option value="">--Chọn Tỉnh/Thành phố--</option>' +
-                provinceHtml.join(" ");
-        })
-        .catch((err) => console.log(err));
-})();
-
-const getListDistrict = () => {
-    return fetch("https://provinces.open-api.vn/api/d/")
-        .then((res) => res.json())
-        .then((data) => data)
-        .catch((err) => console.log(err));
+    closeModalSuccess();
+    closeModalDeleteBill();
+    closeModalDeleteProduct();
 };
 
-const getListWard = () => {
-    return fetch("https://provinces.open-api.vn/api/w/")
-        .then((res) => res.json())
-        .then((data) => data)
-        .catch((err) => console.log(err));
+confirmBtnHtml.onclick = () => {
+    createBill();
 };
 
 const getDistrictByProvinceID = async () => {
@@ -185,126 +160,6 @@ const getWardsByDistrictID = async () => {
         '<option value="">--Chọn Phường/Xã--</option>' + wardHtml.join(" ");
 };
 
-const createID = () => {
-    const date = new Date();
-    const ID = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getTime()}`;
-    return ID;
-};
-
-const validator = (() => {
-    nameInputHtml.forEach((element) => {
-        element.onblur = () => {
-            validateName(element);
-        };
-        element.onkeypress = () => {
-            validateName(element);
-        };
-    });
-    emailInputHtml.onblur = () => {
-        validateEmail(emailInputHtml);
-    };
-    emailInputHtml.onkeyup = () => {
-        validateEmail(emailInputHtml);
-    };
-
-    phoneNumberInputHtml.onblur = () => {
-        validatePhoneNumber(phoneNumberInputHtml);
-    };
-    phoneNumberInputHtml.onkeyup = () => {
-        validatePhoneNumber(phoneNumberInputHtml);
-    };
-
-    addressProvinceHtml.onchange = () => {
-        handleChangeProvince();
-    };
-    addressDistrictHtml.onchange = () => {
-        handleChangeDistrict();
-    };
-    addressWardHtml.onchange = () => {
-        validateAddress();
-    };
-    addressInputHtml.onblur = () => {
-        validateAddress();
-    };
-    addressInputHtml.onkeyup = () => {
-        validateAddress();
-    };
-
-    confirmBtnHtml.onclick = () => {
-        createBill();
-    };
-})();
-
-const validateName = (el) => {
-    const errorMessageHtml = getParentElement(
-        el,
-        ".auth-form-input-col-2"
-    ).querySelector(".auth-form-error");
-    if (el.value !== "") {
-        errorMessageHtml.innerHTML = null;
-        return true;
-    } else {
-        errorMessageHtml.innerHTML = `Vui lòng nhập ${el.name}!`;
-        return false;
-    }
-};
-
-const validateEmail = (element) => {
-    const errorMessageHtml = getParentElement(
-        element,
-        ".auth-form-group"
-    ).querySelector(".auth-form-error");
-    if (element.value === "") {
-        errorMessageHtml.innerHTML = `Vui lòng nhập ${element.name}!`;
-        return false;
-    }
-    if (regex.email.test(element.value)) {
-        errorMessageHtml.innerHTML = null;
-        return true;
-    } else {
-        errorMessageHtml.innerHTML = `Nhập sai ${element.name}!`;
-        return false;
-    }
-};
-
-const validatePhoneNumber = (element) => {
-    const errorMessageHtml = getParentElement(
-        element,
-        ".auth-form-group"
-    ).querySelector(".auth-form-error");
-    if (element.value === "") {
-        errorMessageHtml.innerHTML = `Vui lòng nhập ${element.name}!`;
-        return false;
-    }
-    if (regex.number.test(element.value)) {
-        errorMessageHtml.innerHTML = null;
-        return true;
-    } else {
-        errorMessageHtml.innerHTML = `Nhập sai ${element.name}!`;
-        return false;
-    }
-};
-
-const validateAddress = () => {
-    const errorMessageHtml = getParentElement(
-        addressInputHtml,
-        ".auth-form-group"
-    ).querySelector(".auth-form-error");
-
-    if (
-        addressProvinceHtml.value !== "" &&
-        addressDistrictHtml.value !== "" &&
-        addressWardHtml.value !== "" &&
-        addressInputHtml.value !== ""
-    ) {
-        errorMessageHtml.innerHTML = null;
-        return true;
-    } else {
-        errorMessageHtml.innerHTML = "Vui lòng nhập đầy đủ thông tin địa chỉ!";
-        return false;
-    }
-};
-
 const handleChangeProvince = () => {
     getDistrictByProvinceID();
     validateAddress();
@@ -315,7 +170,18 @@ const handleChangeDistrict = () => {
     validateAddress();
 };
 
-const infoBill = () => {
+const createID = async () => {
+    const date = new Date();
+    const ID = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getTime()}`;
+    const listBill = await getListBill();
+    if (listBill.some((bill) => bill.id === ID)) {
+        return createID();
+    }
+    return ID;
+};
+
+
+const infoBill = async () => {
     validateName(firstNameInputHtml);
     validateName(lastNameInputHtml);
     validateEmail(emailInputHtml);
@@ -337,9 +203,10 @@ const infoBill = () => {
         );
         const ward = wards.find((ward) => ward.code === +addressWardHtml.value);
         const date = new Date();
-
+        const id = await createID();
+        console.log(id);
         const bill = {
-            id: createID(),
+            id,
             fullName: `${firstNameInputHtml.value} ${lastNameInputHtml.value}`,
             email: emailInputHtml.value,
             phoneNumber: phoneNumberInputHtml.value,
@@ -355,13 +222,21 @@ const infoBill = () => {
     }
 };
 
-const createBill = () => {
-    const bill = infoBill();
+const createBill = async () => {
+    const bill = await infoBill();
+    console.log(bill);
     if (bill) {
         postBill(bill);
         confirmBtnHtml.setAttribute("disabled", "");
     }
+}
+
+export {
+    openModalSuccess,
+    openModalDeleteBill,
+    closeModalDeleteBill,
+    openModalWarning,
+    openModalDeleteProduct,
+    handleChangeDistrict,
+    handleChangeProvince
 };
-
-
-export {openModalSuccess, openModalDeleteBill,closeModalDeleteBill, openModalWarning, openModalDeleteProduct}
