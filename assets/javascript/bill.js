@@ -41,18 +41,26 @@ const goToBillPage = async () => {
             </div>
         </div>
         <div class="detail-bill hidden">
+            <div class="detail-bill-customer">
+                <p class="detail-bill-code detail-bill-customer-info">Code: ${bill.id}</p>
+                <p class="detail-bill-email detail-bill-customer-info">Email: ${bill.email}</p>
+                <p class="detail-bill-phone detail-bill-customer-info">Phone: ${bill.phoneNumber}</p>
+                <p class="detail-bill-address detail-bill-customer-info">Address: ${bill.address}</p>
+                <p class="detail-bill-note detail-bill-customer-info">Note: ${bill.note}</p>
+            </div>
             <ul class="detail-bill-list">
+                Cart
                 ${bill.cart.detailCart.map(item => (
                     `<li class="detail-bill-item">
-                    <img src="${item.image}" alt="" class="detail-bill-img">
-                    <div class="detail-bill-info">
-                        <h2 class="detail-bill-name">${item.name}</h2>
-                        <div class="detail-bill-price-wrap">
-                            <span class="detail-bill-price">$${item.subPrice}</span>
-                            <span class="detail-bill-multify">x</span>
-                            <span class="detail-bill-count">${item.buyCount}</span>
+                        <img src="${item.image}" alt="" class="detail-bill-img">
+                        <div class="detail-bill-info">
+                            <h2 class="detail-bill-name">${item.name}</h2>
+                            <div class="detail-bill-price-wrap">
+                                <span class="detail-bill-price">$${item.subPrice}</span>
+                                <span class="detail-bill-multify">x</span>
+                                <span class="detail-bill-count">${item.buyCount}</span>
+                            </div >
                         </div >
-                    </div >
                 </li>`
                 )).join(' ')}
             </ul >

@@ -9,10 +9,10 @@ const addressDistrictHtml = document.getElementById("district");
 const addressWardHtml = document.getElementById("ward");
 const addressInputHtml = document.getElementById("numberaddress");
 
-
 const regex = {
     email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-    number: /^[0-9]+$/,
+    phoneNumber: /^[0-9\-\+]{10,15}$/,
+    letter: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/,
 };
 
 const validator = () => {
@@ -20,7 +20,7 @@ const validator = () => {
         element.onblur = () => {
             validateName(element);
         };
-        element.onkeypress = () => {
+        element.onkeyup = () => {
             validateName(element);
         };
     });
@@ -53,8 +53,6 @@ const validator = () => {
     addressInputHtml.onkeyup = () => {
         validateAddress();
     };
-
-    
 };
 
 const validateName = (el) => {
@@ -62,11 +60,15 @@ const validateName = (el) => {
         el,
         ".auth-form-input-col-2"
     ).querySelector(".auth-form-error");
-    if (el.value !== "") {
+    if (el.value === "") {
+        errorMessageHtml.innerHTML = `Vui lòng nhập ${el.name}!`;
+        return false;
+    }
+    if (regex.letter.test(el.value)) {
         errorMessageHtml.innerHTML = null;
         return true;
     } else {
-        errorMessageHtml.innerHTML = `Vui lòng nhập ${el.name}!`;
+        errorMessageHtml.innerHTML = `${el.name} chỉ gồm chữ cái!`;
         return false;
     }
 };
@@ -98,7 +100,7 @@ const validatePhoneNumber = (element) => {
         errorMessageHtml.innerHTML = `Vui lòng nhập ${element.name}!`;
         return false;
     }
-    if (regex.number.test(element.value)) {
+    if (regex.phoneNumber.test(element.value)) {
         errorMessageHtml.innerHTML = null;
         return true;
     } else {
@@ -127,6 +129,10 @@ const validateAddress = () => {
     }
 };
 
-
-
-export {validator, validateAddress, validateEmail, validateName, validatePhoneNumber}
+export {
+    validator,
+    validateAddress,
+    validateEmail,
+    validateName,
+    validatePhoneNumber,
+};

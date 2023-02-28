@@ -52,7 +52,7 @@ const openModalAuth = async () => {
     modalAuthHtml.classList.remove("hidden");
     validator()
     provinces = await getListProvince();
-    console.log(provinces)
+    getDistrictByProvinceID()
 };
 
 const closeModalAuth = () => {
@@ -160,8 +160,9 @@ const getWardsByDistrictID = async () => {
         '<option value="">--Chọn Phường/Xã--</option>' + wardHtml.join(" ");
 };
 
-const handleChangeProvince = () => {
-    getDistrictByProvinceID();
+const handleChangeProvince = async () => {
+  await getDistrictByProvinceID();
+    getWardsByDistrictID();
     validateAddress();
 };
 
@@ -180,7 +181,6 @@ const createID = async () => {
     return ID;
 };
 
-
 const infoBill = async () => {
     validateName(firstNameInputHtml);
     validateName(lastNameInputHtml);
@@ -195,6 +195,7 @@ const infoBill = async () => {
         validatePhoneNumber(phoneNumberInputHtml) &&
         validateAddress()
     ) {
+        const detailCart = detailCart();
         const province = provinces.find(
             (province) => province.code === +addressProvinceHtml.value
         );
@@ -204,7 +205,6 @@ const infoBill = async () => {
         const ward = wards.find((ward) => ward.code === +addressWardHtml.value);
         const date = new Date();
         const id = await createID();
-        console.log(id);
         const bill = {
             id,
             fullName: `${firstNameInputHtml.value} ${lastNameInputHtml.value}`,
@@ -224,7 +224,6 @@ const infoBill = async () => {
 
 const createBill = async () => {
     const bill = await infoBill();
-    console.log(bill);
     if (bill) {
         postBill(bill);
         confirmBtnHtml.setAttribute("disabled", "");

@@ -91,7 +91,7 @@ html {
 
 .body {
     width: 100%;
-    margin: 72px 0 40px;
+    margin-top: 72px;
 }
 
 /* home */
@@ -229,7 +229,7 @@ html {
     list-style: none;
     width: 100%;
     max-height: 550px;
-    overflow-y: auto;
+    overflow-y: overlay;
 }
 
 .cart-item {
@@ -404,13 +404,13 @@ html {
 .bill-body-list {
     width: 100%;
     max-height: 550px;
-    overflow-y: auto;
+    overflow-y: overlay;
     list-style: none;
 }
 
 .bill-body-item {
     width: 100%;
-    padding-bottom: 8px;
+    padding: 0 18px 8px 0;
     border-bottom: 1px solid #ccc;
 }
 
@@ -477,24 +477,34 @@ html {
 }
 
 .detail-bill {
-    width: 30%;
     padding: 0 20px;
+    width: 100%;
+}
+
+.detail-bill-customer {
+    width: 100%;
+}
+
+.detail-bill-customer-info {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
 }
 
 .detail-bill-list {
     list-style: none;
     width: 100%;
-    
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .detail-bill-item {
-    padding-bottom: 8px;
     width: 100%;
     display: flex;
 }
 
-
 .detail-bill-img {
+    margin-top: 10px;
     height: 70px;
     width: 70px;
     object-fit: cover;
@@ -524,7 +534,7 @@ html {
 }
 
 .detail-bill-multify {
-    
+    font-size: 1rem;
 }
 
 .detail-bill-count {
@@ -544,7 +554,7 @@ html {
 
 .footer-container {
     width: 1200px;
-    margin: 0 auto;
+    margin: 40px auto 0;
     padding-top: 40px;
 }
 
@@ -780,7 +790,7 @@ html {
 
 .auth-form-input-note {
     height: unset !important;
-    user-zoom: none;
+    resize: none;
 }
 
 .auth-form-input-col-2 {
@@ -872,7 +882,7 @@ html {
 .notify-body-icon {
     font-size: 6rem;
     color: orangered;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 .notify-form-text {

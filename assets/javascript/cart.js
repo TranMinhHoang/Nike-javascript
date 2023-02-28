@@ -27,8 +27,9 @@ const addSP = (id) => {
     const newCart = { ...cart };
     newCart.idSP = id;
     const oldCart = listCart.find((cart) => cart.idSP === id);
+    const infoItem = listData.find((data) => data.id === id);
     if (oldCart) {
-        oldCart.soLuong++;
+        oldCart.soLuong < infoItem.quantity ? oldCart.soLuong++ : openModalWarning() 
     } else {
         newCart.soLuong = 1;
         listCart.push(newCart);
