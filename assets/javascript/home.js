@@ -16,12 +16,16 @@ const homePageHtml = document.querySelector(".home-page");
 const cartPageHtml = document.querySelector(".cart-page");
 const BillPageHtml = document.querySelector(".bill-page");
 const footerHtml = document.querySelector(".footer")
+const menuBtnHtml = document.querySelector(".header-mobile-menu")
+const menuMobileHtml = document.querySelector(".navbar-list")
 
-setLocalStorage(keyLocalStorageListSP, listData);
+// setLocalStorage(keyLocalStorageListSP, listData);
+// const _listData = getLocalStorage(keyLocalStorageListSP)
 
 const getListData = () => {
-    const listData = getLocalStorage(keyLocalStorageListSP);
-    const product = listData.map(
+    const _listData = getLocalStorage(keyLocalStorageListSP).length === 0 ? listData : getLocalStorage(keyLocalStorageListSP);
+
+    const product = _listData.map(
         (data) =>
             `<li class="product-item" value="${data.id}" >
         <img class="product-img" src='${data.image}' alt="" >
@@ -57,11 +61,20 @@ const goToHomePage = () => {
     getListData();
 };
 
+const closeMenuMobile = () => {
+    menuMobileHtml.classList.toggle('hide-on-mobile')
+}
+
 goToHomeHtml.forEach(element => {
     element.onclick = () => {
         goToHomePage()
+        closeMenuMobile()
     }
 })
 
+menuBtnHtml.onclick = () => {
+    closeMenuMobile()
+}
 
-export default getListData;
+
+export { goToHomePage, closeMenuMobile};

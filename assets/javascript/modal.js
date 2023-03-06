@@ -2,6 +2,9 @@ import {
     getParentElement,
     setLocalStorage,
     keyLocalStorageItemCart,
+    listData,
+    keyLocalStorageListSP,
+    getLocalStorage,
 } from "./common.js";
 import {
     getListDistrict,
@@ -11,7 +14,13 @@ import {
     postBill,
     deleteBill,
 } from "./api.js";
-import { validateAddress, validateEmail, validateName, validatePhoneNumber, validator } from "./validator.js";
+import {
+    validateAddress,
+    validateEmail,
+    validateName,
+    validatePhoneNumber,
+    validator,
+} from "./validator.js";
 import {
     priceCart,
     detailCart,
@@ -50,9 +59,9 @@ const listWardHtml = document.querySelector("#ward");
 
 const openModalAuth = async () => {
     modalAuthHtml.classList.remove("hidden");
-    validator()
+    validator();
     provinces = await getListProvince();
-    getDistrictByProvinceID()
+    getDistrictByProvinceID();
 };
 
 const closeModalAuth = () => {
@@ -92,10 +101,16 @@ const closeModalDeleteProduct = () => {
 
 const openModalDeleteProduct = (id) => {
     modalDeleteProductHtml.classList.remove("hidden");
+    const _listData = getLocalStorage(keyLocalStorageListSP)
+    const infoCart = listCart.find((cart) => cart.idSP === id);
+    const indexItem = listCart.findIndex((cart) => cart.idSP === id);
+    const infoItem = _listData.find((data) => data.id === id)
+
     deleteProductBtnHtml.onclick = () => {
-        const indexItem = listCart.findIndex((cart) => cart.idSP === id);
+        infoItem.quantity += infoCart.soLuong
         listCart.splice(indexItem, 1);
         setLocalStorage(keyLocalStorageItemCart, listCart);
+        setLocalStorage(keyLocalStorageListSP, _listData)
         handlePriceCart();
         goToCartPage();
         closeModalDeleteProduct();
@@ -161,7 +176,7 @@ const getWardsByDistrictID = async () => {
 };
 
 const handleChangeProvince = async () => {
-  await getDistrictByProvinceID();
+    await getDistrictByProvinceID();
     getWardsByDistrictID();
     validateAddress();
 };
@@ -182,20 +197,13 @@ const createID = async () => {
 };
 
 const infoBill = async () => {
-    validateName(firstNameInputHtml);
-    validateName(lastNameInputHtml);
-    validateEmail(emailInputHtml);
-    validatePhoneNumber(phoneNumberInputHtml);
-    validateAddress();
+    const isFirstName = validateName(firstNameInputHtml);
+    const isLastName = validateName(lastNameInputHtml);
+    const isEmail = validateEmail(emailInputHtml);
+    const isPhoneNumber = validatePhoneNumber(phoneNumberInputHtml);
+    const isAddress = validateAddress();
 
-    if (
-        validateName(firstNameInputHtml) &&
-        validateName(lastNameInputHtml) &&
-        validateEmail(emailInputHtml) &&
-        validatePhoneNumber(phoneNumberInputHtml) &&
-        validateAddress()
-    ) {
-        const detailCart = detailCart();
+    if (isFirstName && isLastName && isEmail && isPhoneNumber && isAddress) {
         const province = provinces.find(
             (province) => province.code === +addressProvinceHtml.value
         );
@@ -228,7 +236,7 @@ const createBill = async () => {
         postBill(bill);
         confirmBtnHtml.setAttribute("disabled", "");
     }
-}
+};
 
 export {
     openModalSuccess,
@@ -237,5 +245,5 @@ export {
     openModalWarning,
     openModalDeleteProduct,
     handleChangeDistrict,
-    handleChangeProvince
+    handleChangeProvince,
 };

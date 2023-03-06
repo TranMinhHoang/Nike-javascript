@@ -1,5 +1,6 @@
 import { getListBill } from "./api.js"
 import { getParentElement } from "./common.js"
+import { closeMenuMobile } from "./home.js"
 import { openModalDeleteBill } from "./modal.js"
 
 const navbarBillHtml = document.getElementById('bill')
@@ -24,23 +25,32 @@ const goToBillPage = async () => {
     const bill = listBill.map(bill => (
         `<li class="bill-body-item" value="${bill.idSystem}">
         <div class="bill-info-list">
-            <div class="bill-info-item">
+            <div class="bill-info-item hide-on-mobile">
                 ${bill.id}
                 <button class="bill-detail-btn">
                     Detail
                     <i class="fa-solid fa-caret-down"></i>
                 </button>
             </div>
-            <div class="bill-info-item">${bill.fullName}</div>
-            <div class="bill-info-item">${bill.date}</div>
-            <div class="bill-info-item">${bill.cart.detailCart.length}</div>
-            <div class="bill-info-item">${bill.cart.detailCart.reduce((prev, curr) => prev + curr.buyCount, 0) }</div>
-            <div class="bill-info-item">$ ${bill.cart.total}</div>
             <div class="bill-info-item">
+                <span class="hidden show-on-mobile m-r-4">Name: </span>
+                ${bill.fullName}
+            </div>
+            <div class="bill-info-item">
+                <span class="hidden show-on-mobile m-r-4">Date: </span>
+                ${bill.date}
+            </div>
+            <div class="bill-info-item hide-on-mobile-tablet">${bill.cart.detailCart.length}</div>
+            <div class="bill-info-item hide-on-mobile-tablet">${bill.cart.detailCart.reduce((prev, curr) => prev + curr.buyCount, 0) }</div>
+            <div class="bill-info-item">
+                <span class="hidden show-on-mobile m-r-4">Total Price: </span>
+                $${bill.cart.total}
+            </div>
+            <div class="bill-info-item hide-on-mobile">
                 <i class="fa-regular fa-rectangle-xmark bill-remove-icon"></i>
             </div>
         </div>
-        <div class="detail-bill hidden">
+        <div class="detail-bill hidden show-on-mobile">
             <div class="detail-bill-customer">
                 <p class="detail-bill-code detail-bill-customer-info">Code: ${bill.id}</p>
                 <p class="detail-bill-email detail-bill-customer-info">Email: ${bill.email}</p>
@@ -88,6 +98,7 @@ const goToBillPage = async () => {
 
 navbarBillHtml.onclick = () => {
     goToBillPage()
+    closeMenuMobile()
 }
 
 

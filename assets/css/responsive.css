@@ -1,0 +1,480 @@
+@media (min-width: 1024px) and (max-width: 1239px) {
+    .header-wrap {
+        width: 984px;
+    }
+
+    .home-page {
+        width: 984px;
+    }
+
+    .product-item {
+        width: 23.3%;
+    }
+
+    .cart-page {
+        width: 984px;
+    }
+
+    .bill-page {
+        width: 984px;
+    }
+
+    .footer-container {
+        width: 984px;
+    }
+
+    .sub-footer-menu {
+        flex-wrap: wrap;
+    }
+
+    .sub-footer-item:last-child {
+        width: 100%;
+        padding-top: 22px;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+/* mobile and tablet */
+@media (max-width: 1023px) {
+
+    .hide-on-mobile-tablet {
+        display: none !important;
+    }
+
+    .cart-head-title-name {
+        width: fit-content;
+    }
+
+    .cart-body {
+        margin-bottom: 96px;
+    }
+
+    .cart-list {
+        overflow-y: unset;
+        max-height: unset;
+    }
+
+    .bill-body-list {
+        max-height: unset;
+        overflow-y: hidden;
+    }
+
+    .footer-menu-item-link {
+        font-size: 1.3rem;
+    }
+
+    .sub-footer-text {
+        font-size: 1.2rem;
+    }
+
+    .sub-footer-label {
+        font-size: 1.2rem;
+    }
+}
+
+/* tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+
+    .hide-on-tablet {
+        display: none !important;
+    }
+
+    .header-wrap {
+        width: 720px;
+    }
+
+    .home-page {
+        width: 720px;
+    }
+
+    .product-item {
+        width: 31%;
+    }
+
+    .product-img {
+        height: 240px;
+    }
+
+    .product-status {
+        padding: 0 28px 6px 28px;
+    }
+
+    .cart-page {
+        width: 720px;
+    }
+
+    .cart-footer {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 10px 7%;
+        margin: 0;
+        background-color: #fff;
+        box-shadow: 0 -5px 5px -5px #333;
+    }
+
+    .bill-page {
+        width: 720px;
+    }
+
+    .bill-footer {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 20px 7%;
+        margin: 0;
+        background-color: #fff;
+        box-shadow: 0 -5px 5px -5px #333;
+    }
+
+    .footer-container {
+        width: 720px;
+    }
+
+    .footer-menu {
+        width: 60%;
+    }
+
+    .footer-social {
+        width: 25%;
+    }
+
+    .sub-footer {
+        height: unset;
+    }
+
+    .sub-footer-menu {
+        flex-wrap: wrap;
+    }
+
+    .sub-footer-item:last-child {
+        width: 100%;
+        padding-top: 22px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+}
+
+/* mobile */
+@media (max-width: 739px) {
+    .hide-on-mobile {
+        display: none !important;
+    }
+
+    .show-on-mobile {
+        display: block !important;
+    }
+
+    .header-wrap {
+        width: 90%;
+    }
+
+    .header-mobile-menu {
+        height: 100%;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+    }
+
+    .header-mobile-menu-icon {
+        font-size: 1.8rem;
+    }
+
+    .navbar-list {
+        position: fixed;
+        top: 62px;
+        right: 0;
+        z-index: 1;
+        flex-direction: column;
+        height: 140px;
+        background-color: #fff;
+        width: 250px;
+        box-shadow: 1px 1px 5px #c3b8b8;
+        animation: mobileMenuSideIn linear 0.3s;
+    }
+
+    .navbar-item {
+        font-size: 1.4rem;
+        padding-right: 18px;
+        border-bottom: 1px solid #ececec;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .home-page {
+        width: 93.4%;
+    }
+
+    .product-item {
+        width: 100%;
+    }
+
+    .product-img {
+        height: 390px;
+    }
+
+    .cart-page {
+        width: 100%;
+    }
+
+    .empty-cart-img {
+        object-fit: fill;
+        width: 100%;
+    }
+
+    .cart-item {
+        display: block;
+        height: 130px;
+        padding: 20px 5%;
+        position: relative;
+    }
+
+    .cart-item-info {
+        width: 100%;
+        height: fit-content;
+    }
+
+    .cart-item-info div {
+        padding: 0 0 0 14px;
+        display: block;
+    }
+
+    .cart-item-img {
+        height: 80px;
+        width: 80px;
+        border: 1px solid #f5f0f0;
+        padding: 0;
+    }
+
+    .cart-item-name {
+        font-size: 1.4rem;
+        padding-top: 6px;
+    }
+
+    .cart-item-quantity {
+        font-size: 1.2rem;
+        margin-top: 4px;
+    }
+
+    .cart-item-states {
+        width: 70%;
+        position: absolute;
+        top: 74px;
+        left: 106px;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .cart-item-state:first-child {
+        width: 40%;
+        height: 24px;
+        border-top: 1px solid #e0dede;
+        border-bottom: 1px solid #e0dede;
+    }
+
+    .plus-minus-icon {
+        height: 100%;
+        width: 24px;
+        border-left: 1px solid #e0dede;
+        border-right: 1px solid #e0dede;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cart-item-state:nth-child(2) {
+        /* position: absolute;
+        top: -30px;
+        left: 78px; */
+        font-size: 1.4rem;
+        color: red;
+    }
+
+    .cart-footer {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 10px 5%;
+        margin: 0;
+        background-color: #fff;
+        box-shadow: 0 -5px 5px -5px #333;
+    }
+
+    .bill-page {
+        width: 90%;
+    }
+    
+    .bill-body {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+
+    
+
+    .bill-body-item {
+        padding-top: 20px;
+        position: relative;
+    }
+
+    .bill-info-list {
+        display: block;
+    }
+
+    .bill-info-item {
+        display: flex;
+        width: 100% !important;
+        padding: 0 0 10px;
+        font-size: 1.4rem;
+    }
+
+    .bill-info-item:nth-child(6) {
+        position: absolute;
+        top: 220px;
+        left: 20px;
+        height: fit-content;
+        color: red;
+        font-size: 1.6rem;
+    }
+
+    .detail-bill-customer {
+        margin-bottom: 50px;
+    }
+
+    .detail-bill-customer-info {
+        font-size: 1.4rem;
+    }
+
+    .detail-bill-list {
+        font-size: 1.4rem;
+    }
+
+    .detail-bill-name {
+        font-size: 1.4rem;
+    }
+
+    .detail-bill-price {
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    .bill-footer {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 10px 5%;
+        margin: 0;
+        background-color: #fff;
+        box-shadow: 0 -5px 5px -5px #333;
+    }
+
+    .footer-container {
+        width: 90%;
+        padding: 40px 0 0;
+    }
+
+    .footer-body {
+        display: block;
+    }
+
+    .footer-menu {
+        width: 100%;
+        display: block;
+    }
+
+    .footer-menu-list {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 20px;
+    }
+
+    .footer-social {
+        width: 50%;
+        display: flex;
+    }
+
+    .footer-social-icon {
+        font-size: 3rem;
+    }
+
+    .sub-footer {
+        display: block;
+    }
+
+    .sub-footer-location {
+        flex-wrap: wrap;
+    }
+
+    .sub-footer-label {
+        width: 100%;
+        margin:20px 0 ;
+    }
+
+    .sub-footer-policy {
+        width: 100%;
+    }
+
+    .sub-footer-menu {
+        display: block;
+    }
+
+    .sub-footer-item {
+        margin-top: 20px;
+    }
+
+    .modal-body {
+        margin: 0;
+        border-radius: unset;
+    }
+
+    .modal-body.modal-body-notify {
+        width: 80%;
+    }
+
+    .auth-form-heading {
+        font-size: 1.6rem;
+    }
+
+    .auth-form-label {
+        font-size: 1.4rem;
+    }
+
+    .auth-form-input {
+        font-size: 1.4rem;
+    }
+
+    .auth-form-select-container {
+        flex-direction: column;
+    }
+
+    .auth-form-select {
+        width: 100%;
+    }
+
+    .notify-body-icon {
+        font-size: 4rem;
+    }
+
+    .notify-form-text {
+        font-size: 1.4rem;
+    }
+
+    @keyframes mobileMenuSideIn {
+        from {
+            opacity: 0;
+            right: -50px;
+        }
+        to {
+            opacity: 1;
+            right: 0;;
+        }
+    }
+    
+}

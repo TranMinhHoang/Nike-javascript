@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./assets/fontawesome-free-6.3.0-web/css/all.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
 </head>
 
 <body>
@@ -19,7 +20,7 @@
                         alt="">
                     <p class="logo-name">Nike</p>
                 </div>
-                <ul class="navbar-list">
+                <ul class="navbar-list hide-on-mobile">
                     <li id="home" class="navbar-item active scr-go-home">Home</li>
                     <li id="about" class="navbar-item">About</li>
                     <li id="bill" class="navbar-item">Bills</li>
@@ -30,6 +31,9 @@
                         </div>
                     </li>
                 </ul>
+                <div class="header-mobile-menu">
+                    <i class="header-mobile-menu-icon fa-solid fa-bars"></i>
+                </div>
             </div>
         </div>
 
@@ -57,7 +61,7 @@
                 </div>
 
                 <div class="existing-cart">
-                    <div class="cart-head">
+                    <div class="cart-head hide-on-mobile">
                         <div class="cart-head-title">
                             <div class="cart-head-title-left">
                                 <h5 class="cart-head-title-name">Product Name</h5>
@@ -133,13 +137,13 @@
             </div>
 
             <div class="bill-page hidden">
-                <div class="bill-head">
+                <div class="bill-head hide-on-mobile">
                     <ul class="bill-head-list">
                         <li class="bill-head-item">Code</li>
                         <li class="bill-head-item">Customer Name</li>
                         <li class="bill-head-item">Date</li>
-                        <li class="bill-head-item">Item Numbers</li>
-                        <li class="bill-head-item">Total Quantity</li>
+                        <li class="bill-head-item hide-on-tablet">Item Numbers</li>
+                        <li class="bill-head-item hide-on-tablet">Total Quantity</li>
                         <li class="bill-head-item">Total Price</li>
                         <li class="bill-head-item">Return</li>
                     </ul>
@@ -216,7 +220,7 @@
                                 <a href="" class="footer-menu-item-link text-uppercase">Send Us Feedback</a>
                             </li>
                         </ul>
-                        <ul class="footer-menu-list">
+                        <ul class="footer-menu-list footer-mobile-help">
                             <li class="footer-menu-item">
                                 <a href="" class="footer-menu-item-link text-uppercase">Get help</a>
                             </li>
@@ -236,7 +240,7 @@
                                 <a href="" class="footer-menu-item-link">Contact Us</a>
                             </li>
                         </ul>
-                        <ul class="footer-menu-list">
+                        <ul class="footer-menu-list footer-mobile-about">
                             <li class="footer-menu-item">
                                 <a href="" class="footer-menu-item-link text-uppercase">About Nike</a>
                             </li>
@@ -383,7 +387,7 @@
         </div>
         <div class="modal-body modal-body-notify">
             <div class="modal-form">
-                <div class="notify-form-header">
+                <div class="notify-form-header hide-on-mobile">
                     <i class="notify-header-icon fa-solid fa-circle-exclamation"></i>
                     <h2 class="notify-form-heading">Thông báo</h2>
                     <i class="close-icon scr-close-modal fa-solid fa-xmark"></i>
@@ -406,7 +410,7 @@
         </div>
         <div class="modal-body modal-body-notify">
             <div class="modal-form">
-                <div class="notify-form-header">
+                <div class="notify-form-header hide-on-mobile">
                     <i class="notify-header-icon fa-solid fa-circle-exclamation"></i>
                     <h2 class="notify-form-heading">Thông báo</h2>
                     <i class="close-icon scr-close-modal fa-solid fa-xmark"></i>
