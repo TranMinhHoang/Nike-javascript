@@ -58,6 +58,10 @@ html {
     font-weight: 700;
 }
 
+.header-nav {
+    display: flex;
+}
+
 .header-mobile-menu {
     display: none;
 }

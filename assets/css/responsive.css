@@ -212,6 +212,17 @@
         justify-content: flex-end;
     }
 
+    #cart {
+        border-bottom: none;
+    }
+
+    .only-cart-mobile {
+        position: absolute;
+        height: 100%;
+        top: 2%;
+        right: 10%;
+    }
+
     .home-page {
         width: 93.4%;
     }
