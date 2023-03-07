@@ -1,8 +1,10 @@
-import { setLocalStorage, keyLocalStorageItemCart } from "./common.js";
+import { setLocalStorage, keyLocalStorageItemCart, listData, getLocalStorage, keyLocalStorageListSP } from "./common.js";
 import { handlePriceCart, goToCartPage, listCart } from "./cart.js"
 import { closeModalDeleteBill, openModalSuccess } from "./modal.js";
 import { goToBillPage } from "./bill.js";
+
 const confirmBtnHtml = document.querySelector(".auth-form-confirm");
+
 
 // address API
 const getListProvince = () => {
@@ -49,7 +51,7 @@ const getListBill = () => {
 const getBillByID = (id) => {
     return fetch(`https://63f81a221dc21d5465b9898b.mockapi.io/api/bill/${id}`)
         .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((data) => data)
         .catch((err) => console.log(err));
 };
 
@@ -87,7 +89,14 @@ const updateBill = (data) => {
         .catch((err) => console.log(err));
 };
 
-const deleteBill = (id) => {
+const deleteBill = async (id) => {
+    const _listData = getLocalStorage(keyLocalStorageListSP)
+    const detailBill = await getBillByID(id)
+    detailBill.cart.detailCart.forEach(cart => {
+        const infoItem = _listData.find((data) => data.id === cart.id)
+        infoItem.quantity += cart.buyCount
+        setLocalStorage(keyLocalStorageListSP, _listData)
+    })
     fetch(`https://63f81a221dc21d5465b9898b.mockapi.io/api/bill/${id}`, {
         method: "DELETE",
     })
