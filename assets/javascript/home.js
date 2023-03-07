@@ -24,7 +24,7 @@ const menuMobileHtml = document.querySelector(".navbar-list")
 
 const getListData = () => {
     const _listData = getLocalStorage(keyLocalStorageListSP).length === 0 ? listData : getLocalStorage(keyLocalStorageListSP);
-
+    setLocalStorage(keyLocalStorageListSP, _listData)
     const product = _listData.map(
         (data) =>
             `<li class="product-item" value="${data.id}" >
@@ -62,7 +62,7 @@ const goToHomePage = () => {
 };
 
 const closeMenuMobile = () => {
-    menuMobileHtml.classList.toggle('hide-on-mobile')
+    menuMobileHtml.classList.add('hide-on-mobile')
 }
 
 goToHomeHtml.forEach(element => {
@@ -73,7 +73,7 @@ goToHomeHtml.forEach(element => {
 })
 
 menuBtnHtml.onclick = () => {
-    closeMenuMobile()
+    menuMobileHtml.classList.toggle('hide-on-mobile')
 }
 
 

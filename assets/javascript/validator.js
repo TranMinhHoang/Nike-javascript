@@ -15,6 +15,8 @@ const regex = {
     letter: /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/,
 };
 
+const emptyString = '';
+
 const validator = () => {
     nameInputHtml.forEach((element) => {
         element.onblur = () => {
@@ -60,11 +62,11 @@ const validateName = (el) => {
         el,
         ".auth-form-input-col-2"
     ).querySelector(".auth-form-error");
-    if (el.value === "") {
+    if (el.value.trim() === emptyString) {
         errorMessageHtml.innerHTML = `Vui lòng nhập ${el.name}!`;
         return false;
     }
-    if (regex.letter.test(el.value)) {
+    if (regex.letter.test(el.value.trim())) {
         errorMessageHtml.innerHTML = null;
         return true;
     } else {
@@ -78,11 +80,11 @@ const validateEmail = (element) => {
         element,
         ".auth-form-group"
     ).querySelector(".auth-form-error");
-    if (element.value === "") {
+    if (element.value.trim() === emptyString) {
         errorMessageHtml.innerHTML = `Vui lòng nhập ${element.name}!`;
         return false;
     }
-    if (regex.email.test(element.value)) {
+    if (regex.email.test(element.value.trim())) {
         errorMessageHtml.innerHTML = null;
         return true;
     } else {
@@ -96,11 +98,11 @@ const validatePhoneNumber = (element) => {
         element,
         ".auth-form-group"
     ).querySelector(".auth-form-error");
-    if (element.value === "") {
+    if (element.value.trim() === emptyString) {
         errorMessageHtml.innerHTML = `Vui lòng nhập ${element.name}!`;
         return false;
     }
-    if (regex.phoneNumber.test(element.value)) {
+    if (regex.phoneNumber.test(element.value.trim())) {
         errorMessageHtml.innerHTML = null;
         return true;
     } else {
@@ -116,10 +118,10 @@ const validateAddress = () => {
     ).querySelector(".auth-form-error");
 
     if (
-        addressProvinceHtml.value !== "" &&
-        addressDistrictHtml.value !== "" &&
-        addressWardHtml.value !== "" &&
-        addressInputHtml.value !== ""
+        addressProvinceHtml.value !== emptyString &&
+        addressDistrictHtml.value !== emptyString &&
+        addressWardHtml.value !== emptyString &&
+        addressInputHtml.value !== emptyString
     ) {
         errorMessageHtml.innerHTML = null;
         return true;

@@ -215,12 +215,12 @@ const infoBill = async () => {
         const id = await createID();
         const bill = {
             id,
-            fullName: `${firstNameInputHtml.value} ${lastNameInputHtml.value}`,
-            email: emailInputHtml.value,
-            phoneNumber: phoneNumberInputHtml.value,
-            address: `${addressInputHtml.value}, ${ward.name}, ${district.name}, ${province.name}`,
+            fullName: `${firstNameInputHtml.value.trim()} ${lastNameInputHtml.value.trim()}`,
+            email: emailInputHtml.value.trim(),
+            phoneNumber: phoneNumberInputHtml.value.trim(),
+            address: `${addressInputHtml.value.trim()}, ${ward.name}, ${district.name}, ${province.name}`,
             date: new Intl.DateTimeFormat("en-GB").format(date),
-            note: noteInputHtml.value,
+            note: noteInputHtml.value.trim(),
             cart: {
                 detailCart: detailCart(),
                 total: priceCart.get("total"),

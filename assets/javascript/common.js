@@ -48,6 +48,34 @@ const listData = [
         price: 500,
         quantity: 7,
     },
+    {
+        id: 7,
+        name: "Nike Air Max 90",
+        image: "./assets/images/home/NikeAirMax90.jfif",
+        price: 579,
+        quantity: 5,
+    },
+    {
+        id: 8,
+        name: "Nike Air Max 270",
+        image: "./assets/images/home/NikeAirMax270.png",
+        price: 399,
+        quantity: 8,
+    },
+    {
+        id: 9,
+        name: "Nike Air Max Dawn",
+        image: "./assets/images/home/NikeAirMaxDawn.webp",
+        price: 799,
+        quantity: 50,
+    },
+    {
+        id: 10,
+        name: "Nike Lebron 9",
+        image: "./assets/images/home/NikeLebron9.jfif",
+        price: 699,
+        quantity: 46,
+    },
 ];
 
 const keyLocalStorageListSP = "DANHSACHSP";

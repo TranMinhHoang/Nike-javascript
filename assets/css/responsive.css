@@ -119,6 +119,10 @@
         width: 720px;
     }
 
+    .bill-body {
+        margin-bottom: 70px;
+    }
+
     .bill-footer {
         position: fixed;
         bottom: 0;
