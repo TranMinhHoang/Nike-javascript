@@ -46,8 +46,9 @@ const goToBillPage = async () => {
                 <span class="hidden show-on-mobile m-r-4">Total Price: </span>
                 $${bill.cart.total}
             </div>
-            <div class="bill-info-item hide-on-mobile">
-                <i class="fa-regular fa-rectangle-xmark bill-remove-icon"></i>
+            <div class="bill-info-item">
+                <button class="hidden show-on-mobile bill-remove-icon remove-bill-btn">Return</button>
+                <i class="fa-regular fa-rectangle-xmark bill-remove-icon hide-on-mobile"></i>
             </div>
         </div>
         <div class="detail-bill hidden show-on-mobile">

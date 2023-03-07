@@ -359,6 +359,27 @@
         font-size: 1.6rem;
     }
 
+    .bill-info-item:last-child {
+        width: 60px;
+        position: absolute;
+        bottom: 0;
+        left: 9px;
+        height: 40px;
+    }
+
+    .remove-bill-btn {
+        width: 91%;
+        color: #fff;
+        background-color: #CB444A;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.6rem;
+    }
+
+    .detail-bill {
+        padding-bottom: 40px;
+    }
+
     .detail-bill-customer {
         margin-bottom: 50px;
     }
@@ -479,6 +500,10 @@
 
     .notify-form-text {
         font-size: 1.4rem;
+    }
+
+    .notify-form-header {
+        display: none;
     }
 
     @keyframes mobileMenuSideIn {
