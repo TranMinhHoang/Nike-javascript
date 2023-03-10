@@ -354,13 +354,14 @@
         position: absolute;
         top: 220px;
         left: 20px;
+        width: fit-content !important;
         height: fit-content;
         color: red;
         font-size: 1.6rem;
     }
 
     .bill-info-item:last-child {
-        width: 60px;
+        width: 97.5% !important;
         position: absolute;
         bottom: 0;
         left: 9px;
@@ -368,7 +369,7 @@
     }
 
     .remove-bill-btn {
-        width: 91%;
+        width: 93%;
         color: #fff;
         background-color: #CB444A;
         border: none;
